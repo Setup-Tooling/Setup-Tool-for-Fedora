@@ -1,0 +1,1 @@
+# rpm-fusion-flathub-setup-Fedora-36-37-38
