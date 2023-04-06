@@ -7,7 +7,7 @@ _____________________________________________________
 pls read the README.md on older versions, if you use those, due to differences in the process
 ______________________________________________________
 
-Script installs:
+Script gives you the option to install:
 - RPM Fusion free (repo)
 - RPM Fusion nonfree (repo)
 - Group core (to enable downloads through software centers)
@@ -15,15 +15,17 @@ Script installs:
 - RPM Fusion free tainted (repo)
 - libdvdcss (support for copyrighted DVDs)
 - RPM Fusion nonfree tainted (repo)
-- Flathub (repo) (removed in 38 due to it being enabled by default in Fedora 38)
+- all of the above
 - system updates (dnf update)
 
-There is a version which reboots your PC/laptop after installing the stuff mentioned above and one which doesn't reboot.
+the script gives you the option reboot
+
+older versions still contain:
+- Flathub (repo) (removed in 38 due to it being enabled by default in Fedora 38)
+
 This project has no relation the projects named above.
 
 This needs to be enabled:
 ![Screenshot from 2023-01-17 00-41-11](https://user-images.githubusercontent.com/95959450/212780926-f5806457-5b99-4c5c-9b70-ef21296ea32e.png)
 
-after enabling the above, right-click the file and press "Run as a Programm"
-
-Now you need to type in your password and press enter.
+after enabling the above, right-click in the and open it in terminal then type in ./start.sh
