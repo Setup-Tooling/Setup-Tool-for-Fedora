@@ -19,18 +19,42 @@ do
         "Install RPM Fusion Free")
             sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
             sudo dnf groupupdate -y core
+            if [ $? -eq 0 ]; then
+    echo "Successfully installed RPM"
+  else
+    echo "Failed to install RPM"
+    exit 1
+  fi
             ;;
         "Install RPM Fusion Free Tainted")
             sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
             sudo dnf groupupdate -y sound-and-video
             sudo dnf install -y rpmfusion-free-release-tainted
+            if [ $? -eq 0 ]; then
+    echo "Successfully installed RPMs"
+  else
+    echo "Failed to install RPMs"
+    exit 1
+  fi
             ;;
         "Install RPM Fusion Non-Free")
             sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
             sudo dnf groupupdate -y core
+            if [ $? -eq 0 ]; then
+    echo "Successfully installed RPM"
+  else
+    echo "Failed to install RPM"
+    exit 1
+  fi
             ;;
         "Install RPM Fusion Non-Free Tainted")
             sudo dnf install -y rpmfusion-nonfree-release-tainted
+            if [ $? -eq 0 ]; then
+    echo "Successfully installed RPM"
+  else
+    echo "Failed to install RPM"
+    exit 1
+  fi
             ;;
         "Install All")
             sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
@@ -40,9 +64,21 @@ do
             sudo dnf install -y rpmfusion-free-release-tainted
             sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
             sudo dnf install -y rpmfusion-nonfree-release-tainted
+            if [ $? -eq 0 ]; then
+    echo "Successfully installed RPMs"
+  else
+    echo "Failed to install RPMs"
+    exit 1
+  fi
             ;;
         "Update")
             sudo dnf update -y && flatpak update -y
+            if [ $? -eq 0 ]; then
+    echo "Successfully installed updates"
+  else
+    echo "Failed to install updates"
+    exit 1
+  fi
             ;;
         "Reboot system")
       echo "Rebooting system..."
