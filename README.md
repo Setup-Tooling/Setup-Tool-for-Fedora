@@ -20,7 +20,7 @@ Script gives you the option to install:
 
 the script gives you the option reboot
 
-older versions still contain:
+older versions still contained:
 - Flathub (repo) (removed in 38 due to it being enabled by default in Fedora 38)
 
 This project has no relation the projects named above.
