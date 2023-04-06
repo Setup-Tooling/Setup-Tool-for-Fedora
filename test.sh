@@ -38,6 +38,9 @@ do
         "Install RPM Fusion Non-Free Tainted")
             sudo dnf install -y rpmfusion-nonfree-release-tainted
             ;;
+        "Enable compatibility for DVDs"
+            sudo dnf install -y libdvdcss
+            ;;
         "Install All")
             sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
             sudo dnf groupupdate -y core
@@ -46,6 +49,7 @@ do
             sudo dnf install -y rpmfusion-free-release-tainted
             sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
             sudo dnf install -y rpmfusion-nonfree-release-tainted
+            sudo dnf install -y libdvdcss
             ;;
         "Update")
             sudo dnf update -y && flatpak update -y
