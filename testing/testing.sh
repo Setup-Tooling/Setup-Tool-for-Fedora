@@ -44,6 +44,10 @@ do
         "Update")
             sudo dnf update -y && flatpak update -y
             ;;
+        "Reboot system")
+      echo "Rebooting system..."
+      reboot
+            ;;
         "Quit")
             break
             ;;
