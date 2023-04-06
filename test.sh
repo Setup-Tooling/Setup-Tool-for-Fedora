@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Welcome to the Fedora repository installer!"
+echo "Welcome to the my repository installer!"
 
 PS3='Please enter your choice: '
 options=("Modify dnf.conf" "Install RPM Fusion Free" "Install RPM Fusion Free Tainted" "Install RPM Fusion Non-Free" "Install RPM Fusion Non-Free Tainted" "Install All" "Update" "Quit")
@@ -48,4 +48,4 @@ do
     esac
 done
 
-
+echo "Thank you for using the my repository installer! Goodbye."
