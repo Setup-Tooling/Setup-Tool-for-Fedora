@@ -3,7 +3,7 @@
 echo "Welcome to the my repository installer!"
 
 PS3='Please enter your choice: '
-options=("Modify dnf.conf" "Install RPM Fusion Free" "Install RPM Fusion Free Tainted" "Install RPM Fusion Non-Free" "Install RPM Fusion Non-Free Tainted" "Install All" "Update" "Quit")
+options=("Modify dnf.conf" "Install RPM Fusion Free" "Install RPM Fusion Free Tainted" "Install RPM Fusion Non-Free" "Install RPM Fusion Non-Free Tainted" "Install All" "Update" "Quit" "Reboot system")
 select opt in "${options[@]}"
 do
     case $opt in
