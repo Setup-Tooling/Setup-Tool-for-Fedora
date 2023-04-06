@@ -37,11 +37,11 @@ select choice in "Set defaultyes=True" "Set max_parallel_downloads=10" "Set fast
       break
       ;;
     "Quit")
-      if [ -f "test.sh" ]; then
-        chmod +x test.sh
-        ./test.sh
+      if [ -f "testing.sh" ]; then
+        chmod +x testing.sh
+        ./testing.sh
       else
-        echo "The test.sh script does not exist."
+        echo "The testing.sh script does not exist."
       fi
       break
       ;;
