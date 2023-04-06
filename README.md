@@ -1,28 +1,10 @@
 # rpm-fusion-setup (Fedora 38 compatible)
 
-This project helps you installing RPM-Fusion and Flathub quickly on Fedora.
+This project helps you installing RPM-Fusion and making dnf.conf changes quickly on Fedora.
 
 _____________________________________________________
 
-I suggest modifying the dnf.conf file before to make this process faster:
-
-sudo nano /etc/dnf/dnf.conf
-
-add these lines below "skip_if_unavailable=True":
-
-
-#enables dnf to search for the fastest mirrior available
-
-fastestmirror=True
-
-#you can change this according to your internet speed, go below 10 if you have slow internet and over 10 if you have above gigabit
-
-max_parallel_downloads=10
-
-#makes the default answer for package installation yes instead of no
-
-defaultyes=True
-
+pls read the README.md on older versions, if you use those, due to differences in the process
 ______________________________________________________
 
 Script installs:
