@@ -1,4 +1,5 @@
-# rpm-fusion-setup (Fedora 38 compatible)
+# rpm-fusion-setup (Fedora 38 compatible) 
+# please try out the beta and give feedback
 
 This project helps you installing RPM-Fusion and making dnf.conf changes quickly on Fedora.
 
