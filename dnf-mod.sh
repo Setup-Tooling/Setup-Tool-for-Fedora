@@ -6,24 +6,22 @@ echo "Welcome to my DNF configuration script!"
 select choice in "Set defaultyes=True" "Set max_parallel_downloads=10" "Set fastestmirror=True" "Set all options" "Add custom option" "Quit"; do
   case $choice in
     "Set defaultyes=True")
-      sed -i 's/#\? *defaultyes *=.*/defaultyes=True/g' /etc/dnf/dnf.conf
+      sudo dnf config-manager --setopt="defaultyes=True" --save
       echo "defaultyes=True has been set."
       break
       ;;
     "Set max_parallel_downloads=10")
-      sed -i 's/#\? *max_parallel_downloads *=.*/max_parallel_downloads=10/g' /etc/dnf/dnf.conf
+      sudo dnf config-manager --setopt="max_parallel_downloads=10" --save
       echo "max_parallel_downloads=10 has been set."
       break
       ;;
     "Set fastestmirror=True")
-      sed -i 's/#\? *fastestmirror *=.*/fastestmirror=True/g' /etc/dnf/dnf.conf
+      sudo dnf config-manager --setopt="fastestmirror=True" --save
       echo "fastestmirror=True has been set."
       break
       ;;
     "Set all options")
-      sed -i 's/#\? *defaultyes *=.*/defaultyes=True/g' /etc/dnf/dnf.conf
-      sed -i 's/#\? *max_parallel_downloads *=.*/max_parallel_downloads=10/g' /etc/dnf/dnf.conf
-      sed -i 's/#\? *fastestmirror *=.*/fastestmirror=True/g' /etc/dnf/dnf.conf
+      sudo dnf config-manager --setopt="defaultyes=True" --setopt="max_parallel_downloads=10" --setopt="fastestmirror=True" --save
       echo "All options have been set."
       break
       ;;
@@ -32,7 +30,7 @@ select choice in "Set defaultyes=True" "Set max_parallel_downloads=10" "Set fast
       read option_name
       echo "Enter the value of the option: "
       read option_value
-      sed -i "s/#\? *$option_name *=.*/$option_name=$option_value/g" /etc/dnf/dnf.conf
+      sudo dnf config-manager --setopt="$option_name=$option_value" --save
       echo "$option_name=$option_value has been added."
       break
       ;;
@@ -52,4 +50,3 @@ select choice in "Set defaultyes=True" "Set max_parallel_downloads=10" "Set fast
 done
 
 echo "Configuration completed!"
-
