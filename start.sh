@@ -11,7 +11,7 @@ do
             echo "opening dnf modification"
              if [ -f "dnf-mod.sh" ]; then
                 chmod +x dnf-mod.sh
-            ./dnf-mod.sh
+            sudo ./dnf-mod.sh
             else
             echo "The dnf-mod.sh script does not exist."
             fi
