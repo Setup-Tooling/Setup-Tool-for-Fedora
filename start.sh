@@ -3,7 +3,7 @@
 echo "Welcome to the my repository installer!"
 
 PS3='Please enter your choice: '
-options=("Modify dnf.conf" "Install RPM Fusion Free" "Install RPM Fusion Free Tainted" "Install RPM Fusion Non-Free" "Install RPM Fusion Non-Free Tainted" "Install All" "Update" "Quit" "Reboot system")
+options=("Modify dnf.conf" "Install RPM Fusion Free" "Install RPM Fusion Free Tainted" "Install RPM Fusion Non-Free" "Install RPM Fusion Non-Free Tainted" "DVD Compatibility" "Install All" "Update" "Quit" "Reboot system")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -56,6 +56,15 @@ do
     exit 1
   fi
             ;;
+            "DVD Compatibility")
+            sudo dnf install -y libdvdcss
+             if [ $? -eq 0 ]; then
+    echo "Successfully installed RPM"
+  else
+    echo "Failed to install RPM"
+    exit 1
+  fi
+            ;;
         "Install All")
             sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
             sudo dnf groupupdate -y core
@@ -64,6 +73,7 @@ do
             sudo dnf install -y rpmfusion-free-release-tainted
             sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
             sudo dnf install -y rpmfusion-nonfree-release-tainted
+            sudo dnf install -y libdvdcss
             if [ $? -eq 0 ]; then
     echo "Successfully installed RPMs"
   else
