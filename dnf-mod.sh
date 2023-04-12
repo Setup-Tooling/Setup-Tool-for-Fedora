@@ -8,22 +8,22 @@ select choice in "Set defaultyes=True" "Set max_parallel_downloads=10" "Set fast
     "Set defaultyes=True")
       sudo dnf config-manager --setopt="defaultyes=True" --save
       echo "defaultyes=True has been set."
-      break
+      
       ;;
     "Set max_parallel_downloads=10")
       sudo dnf config-manager --setopt="max_parallel_downloads=10" --save
       echo "max_parallel_downloads=10 has been set."
-      break
+      
       ;;
     "Set fastestmirror=True")
       sudo dnf config-manager --setopt="fastestmirror=True" --save
       echo "fastestmirror=True has been set."
-      break
+      
       ;;
     "Set all options")
       sudo dnf config-manager --setopt="defaultyes=True" --setopt="max_parallel_downloads=10" --setopt="fastestmirror=True" --save
       echo "All options have been set."
-      break
+      
       ;;
     "Add custom option")
       echo "Enter the name of the option you want to add (without any spaces): "
@@ -32,7 +32,7 @@ select choice in "Set defaultyes=True" "Set max_parallel_downloads=10" "Set fast
       read option_value
       sudo dnf config-manager --setopt="$option_name=$option_value" --save
       echo "$option_name=$option_value has been added."
-      break
+      
       ;;
     "Quit")
       if [ -f "start.sh" ]; then
