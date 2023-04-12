@@ -95,6 +95,7 @@ do
       reboot
             ;;
         "Quit")
+        echo "Quitting script... See you next time :)"
             break
             ;;
         *) echo "Invalid option $REPLY";;
