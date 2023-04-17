@@ -56,7 +56,7 @@ do
     exit 1
   fi
             ;;
-            "Install Flathub (only needed if not enabled on first boot or if using a spin)"
+            "Install Flathub (only needed if not enabled on first boot or if using a spin)")
             flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
             if [ $? -eq 0 ]; then
     echo "Successfully enabled Flathub"
