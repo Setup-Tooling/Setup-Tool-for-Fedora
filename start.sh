@@ -3,7 +3,7 @@
 echo "Welcome to the my repository installer!"
 
 PS3='Please enter your choice: '
-options=("Modify dnf.conf" "Install RPM Fusion Free" "Install RPM Fusion Free Tainted" "Install RPM Fusion Non-Free" "Install RPM Fusion Non-Free Tainted" "DVD Compatibility" "Install All" "Update" "Quit" "Reboot system")
+options=("Modify dnf.conf" "Install RPM Fusion Free" "Install RPM Fusion Free Tainted" "Install RPM Fusion Non-Free" "Install RPM Fusion Non-Free Tainted" "Install Flathub (only needed if not enabled on first boot or if using a spin)" "DVD Compatibility" "Install All" "Update" "Quit" "Reboot system")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -53,6 +53,15 @@ do
     echo "Successfully installed RPM"
   else
     echo "Failed to install RPM"
+    exit 1
+  fi
+            ;;
+            "Install Flathub (only needed if not enabled on first boot or if using a spin)"
+            flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+            if [ $? -eq 0 ]; then
+    echo "Successfully enabled Flathub"
+  else
+    echo "Failed to enable Flathub"
     exit 1
   fi
             ;;
