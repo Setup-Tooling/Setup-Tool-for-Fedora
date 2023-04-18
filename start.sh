@@ -3,7 +3,9 @@
 echo "Welcome to the my repository installer!"
 
 PS3='Please enter your choice: '
+
 options=("Modify dnf.conf" "Install RPM Fusion Free" "Install RPM Fusion Free Tainted" "Install RPM Fusion Non-Free" "Install RPM Fusion Non-Free Tainted" "Install Flathub (only needed if not enabled on first boot or if using a spin)" "DVD Compatibility" "Install All" "Update" "Quit" "Reboot system")
+
 select opt in "${options[@]}"
 do
     case $opt in
