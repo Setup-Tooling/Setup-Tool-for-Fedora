@@ -4,7 +4,7 @@ echo "Welcome to the my setup program!"
 
 PS3='Please enter your choice: '
 
-options=("Modify dnf.conf" "Repo-setup" "Package-Installer")
+options=("Modify dnf.conf" "Repo-setup" "Package-Installer" "Quit")
 select opt in "${options[@]}"
 do
  case $opt in
@@ -38,6 +38,11 @@ do
             fi
             ;;
             
+             "Quit")
+        echo "Configuration completed!"
+        exit 0
+        ;;
+        
   *) echo "Invalid option $REPLY";;
   esac
 done
