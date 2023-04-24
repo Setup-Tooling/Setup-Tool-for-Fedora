@@ -23,7 +23,7 @@ the script gives you the option reboot
 
 This project has no relation the projects named above.
 
-This needs to be enabled:
+This needs to be enabled on start.sh:
 ![Screenshot from 2023-01-17 00-41-11](https://user-images.githubusercontent.com/95959450/212780926-f5806457-5b99-4c5c-9b70-ef21296ea32e.png)
 
-after enabling the above, right-click in the and open it in terminal then type in ./start.sh (if you are on Gnome just right-click the start.sh file and click "run as program")
+after enabling the above, right-click in the folder and open it in terminal then type in ./start.sh (if you are on Gnome just right-click the start.sh file and click "run as program")
