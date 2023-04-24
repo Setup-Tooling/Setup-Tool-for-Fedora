@@ -17,11 +17,9 @@ Script gives you the option to install:
 - RPM Fusion nonfree tainted (repo)
 - all of the above
 - system updates (dnf update)
+- Flathub (repo) (not needed on F38 and later, if third party repos are enabled)
 
 the script gives you the option reboot
-
-older versions still contained:
-- Flathub (repo) (removed in 38 due to it being enabled by default in Fedora 38)
 
 This project has no relation the projects named above.
 
