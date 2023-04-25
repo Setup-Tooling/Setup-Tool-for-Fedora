@@ -4,7 +4,7 @@ echo "Welcome to the my setup program!"
 
 PS3='Please enter your choice: '
 
-options=("Modify dnf.conf" "Repo-setup" "Package-Installer" "Quit")
+options=("Modify dnf.conf" "Repo-setup" "Package-Installer" "Reboot system" "Quit")
 select opt in "${options[@]}"
 do
  case $opt in
@@ -38,7 +38,13 @@ do
             fi
             ;;
             
-             "Quit")
+   "Reboot system")
+      echo "Rebooting system..."
+      sudo reboot
+      break
+      ;;
+      
+    "Quit")
         echo "Configuration completed!"
         exit 0
         ;;
