@@ -34,7 +34,9 @@ and then installs them.
 ______________________________________________________
 
 dnf-mod.sh options:
-- 
+- set default answer to Yes/Y
+- set maximum simultaneous downloads to 10
+- bring in your own dnf.conf changes
 ______________________________________________________
 This project has no relation the projects named above.
 
