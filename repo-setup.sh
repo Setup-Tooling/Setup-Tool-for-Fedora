@@ -81,6 +81,7 @@ do
             sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
             sudo dnf install -y rpmfusion-nonfree-release-tainted
             sudo dnf install -y libdvdcss
+            flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
             if [ $? -eq 0 ]; then
     echo "Successfully installed RPMs"
   else
