@@ -99,11 +99,6 @@ do
   fi
             ;;
             
-        "Reboot system")
-      echo "Rebooting system..."
-      reboot
-            ;;
-            
         "Quit")
        if [ -f "start.sh" ]; then
         chmod +x start.sh
