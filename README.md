@@ -1,13 +1,20 @@
-# rpm-fusion-and-dnf setup (Fedora 38 compatible)
+# BurningPho3nix setup script for Fedora (Fedora 38 compatible)
 
-This project helps you installing RPM-Fusion and making dnf.conf changes quickly on Fedora.
+This project helps you installing RPM-Fusion, making dnf.conf changes and installing applications quickly on Fedora.
 
-_____________________________________________________
-
-pls read the README.md on older versions, if you use those, due to differences in the process
 ______________________________________________________
 
-Script gives you the option to install:
+Please read the README.md on older versions, if you use those, due to differences in the process
+______________________________________________________
+
+start.sh options:
+- open repo-setup.sh
+- open package-installer
+- open dnf-mod.sh
+- reboot system
+______________________________________________________
+
+repo-setup.sh gives you the option to install:
 - RPM Fusion free (repo)
 - RPM Fusion nonfree (repo)
 - Group core (to enable downloads through software centers)
@@ -19,8 +26,16 @@ Script gives you the option to install:
 - system updates (dnf update)
 - Flathub (repo) (not needed on F38 and later, if third party repos are enabled)
 
-the script gives you the option reboot
+______________________________________________________
 
+package-installer.sh allows you to type in programs you want installed
+and it then searches for those packages with dnf and flatpak
+and then installs them.
+______________________________________________________
+
+dnf-mod.sh options:
+- 
+______________________________________________________
 This project has no relation the projects named above.
 
 This needs to be enabled on start.sh:
