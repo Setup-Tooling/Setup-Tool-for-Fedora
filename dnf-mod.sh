@@ -4,7 +4,7 @@ echo "Welcome to my DNF configuration script!"
 
 PS3="Please select an option: "
 
-options=("Set defaultyes=True" "Set max_parallel_downloads=10" "Set fastestmirror=True" "Set all recommended options" "Add custom option" "Quit")
+options=("Set defaultyes=True" "Set max_parallel_downloads=10" "Set all recommended options" "Add custom option" "Quit")
 select opt in "${options[@]}"
 do
   case $opt in
@@ -18,13 +18,8 @@ do
       echo "max_parallel_downloads=10 has been set."
       ;;
       
-    "Set fastestmirror=True")
-      sudo dnf config-manager --setopt="fastestmirror=True" --save
-      echo "fastestmirror=True has been set."
-      ;;
-      
     "Set all recommended options")
-      sudo dnf config-manager --setopt="defaultyes=True" --setopt="max_parallel_downloads=10" --setopt="fastestmirror=True" --save
+      sudo dnf config-manager --setopt="defaultyes=True" --setopt="max_parallel_downloads=10" --save
       echo "All options have been set."
       ;;
       
