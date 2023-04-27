@@ -34,12 +34,17 @@ do
             ;;
       
     "Quit")
-            echo "Configuration completed!"
-            exit 0
+            if [ -f "start.sh" ]; then
+            chmod +x start.sh
+            ./start.sh
+            else
+            echo "The start.sh script does not exist."
+            fi
+            break
             ;;
         
   *) echo "Invalid option $REPLY";;
   esac
 done
 
-echo "Thank you for using the my setup program! Goodbye."
+echo "Thank you for using the my codec setup program! Goodbye."
