@@ -47,5 +47,5 @@ after enabling the above, right-click in the folder and open it in terminal then
 _______________________________________________________
 DISCLAIMER
 
-This project has no relation to the Fedora Project nor the RPM Fusion project nor to Flathub.
-Furthermore this project has no relation to Red Hat, Red Hat Czech, Red Hat India and IBM.
+THIS PROJECT HAS NO RELATION TO THE FEDORA PROJECT NOR THE RPM FUSION PROJECT NOR TO FLATHUB.
+FURTHERMORE THIS PROJECT HAS NO RELATION TO RED HAT, RED HAT CZECH, RED HAT INDIA AND IBM.
