@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Welcome to the my setup program!"
+echo "Welcome to the my codec setup program!"
 
 PS3='Please enter your choice: '
 
