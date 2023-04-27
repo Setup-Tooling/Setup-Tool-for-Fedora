@@ -38,9 +38,14 @@ dnf-mod.sh options:
 - set maximum simultaneous downloads to 10
 - bring in your own dnf.conf changes
 ______________________________________________________
-This project has no relation the projects named above.
 
 This needs to be enabled on start.sh:
 ![Screenshot from 2023-01-17 00-41-11](https://user-images.githubusercontent.com/95959450/212780926-f5806457-5b99-4c5c-9b70-ef21296ea32e.png)
 
 after enabling the above, right-click in the folder and open it in terminal then type in ./start.sh (if you are on Gnome just right-click the start.sh file and click "run as program")
+
+_______________________________________________________
+DISCLAIMER
+
+This project has no relation to the Fedora Project nor the RPM Fusion project nor to Flathub.
+Furthermore this project has no relation to Red Hat, Red Hat Czech, Red Hat India and IBM.
