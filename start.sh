@@ -4,7 +4,7 @@ echo "Welcome to the my setup program!"
 
 PS3='Please enter your choice: '
 
-options=("Modify dnf.conf" "Repo-setup" "Package-Installer" "Reboot system" "Quit")
+options=("Modify dnf.conf" "Repo-setup" "Package-Installer" "Codec-setup" "Reboot system" "Quit")
 select opt in "${options[@]}"
 do
  case $opt in
@@ -35,6 +35,16 @@ do
             sudo ./package-installer.sh
             else
             echo "The package-installer.sh script does not exist."
+            fi
+            ;;
+            
+   "Codec-setup")
+           echo "opening codec setup"
+             if [ -f "codec-setup.sh" ]; then
+                chmod +x codec-setup.sh
+            sudo ./codec-setup.sh
+            else
+            echo "The codec-setup.sh script does not exist."
             fi
             ;;
             
