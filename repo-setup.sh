@@ -76,6 +76,7 @@ do
         "Install All")
             sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
             sudo dnf groupupdate -y core
+            sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
             sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
             sudo dnf groupupdate -y sound-and-video
             sudo dnf install -y rpmfusion-free-release-tainted
