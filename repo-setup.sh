@@ -4,7 +4,7 @@ echo "Welcome to the my repository installer!"
 
 PS3='Please enter your choice: '
 
-options=("Install RPM Fusion Free" "Install RPM Fusion Free Tainted" "Install RPM Fusion Non-Free" "Install RPM Fusion Non-Free Tainted" "Install Flathub (only needed if not enabled on first boot or if using a spin)" "DVD Compatibility" "Install All" "Update" "Quit")
+options=("Install RPM Fusion Free" "Install RPM Fusion Free Tainted" "Install RPM Fusion Non-Free" "Install RPM Fusion Non-Free Tainted" "Install Flathub (only needed if not enabled on first boot or if using a spin)" "Install All" "Update" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -60,23 +60,12 @@ do
   fi
             ;;
             
-            "DVD Compatibility")
-            sudo dnf install -y libdvdcss
-             if [ $? -eq 0 ]; then
-    echo "Successfully installed RPM"
-  else
-    echo "Failed to install RPM"
-    exit 1
-  fi
-            ;;
-            
         "Install All")
             sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
             sudo dnf groupupdate -y core
             sudo dnf install -y rpmfusion-free-release-tainted
             sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
             sudo dnf install -y rpmfusion-nonfree-release-tainted
-            sudo dnf install -y libdvdcss
             flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
             if [ $? -eq 0 ]; then
     echo "Successfully installed RPMs"
