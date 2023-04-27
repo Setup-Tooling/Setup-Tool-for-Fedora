@@ -4,7 +4,7 @@ echo "Welcome to the my repository installer!"
 
 PS3='Please enter your choice: '
 
-options=("Install RPM Fusion Free" "Install RPM Fusion Free Tainted" "Install RPM Fusion Non-Free" "Install RPM Fusion Non-Free Tainted" "Install Flathub (only needed if not enabled on first boot or if using a spin)" "DVD Compatibility" "Install All" "Update" "Quit" "Reboot system")
+options=("Install RPM Fusion Free" "Install RPM Fusion Free Tainted" "Install RPM Fusion Non-Free" "Install RPM Fusion Non-Free Tainted" "Install Flathub (only needed if not enabled on first boot or if using a spin)" "DVD Compatibility" "Install All" "Update" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -20,6 +20,7 @@ do
             ;;
             
         "Install RPM Fusion Free Tainted")
+            sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
             sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
             sudo dnf groupupdate -y sound-and-video
             sudo dnf install -y rpmfusion-free-release-tainted
