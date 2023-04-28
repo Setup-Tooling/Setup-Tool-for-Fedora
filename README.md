@@ -18,7 +18,6 @@ repo-setup.sh gives you the option to install:
 - RPM Fusion free (repo)
 - RPM Fusion nonfree (repo)
 - Group core (to enable downloads through software centers)
-- Group multimedia & Group sound-and-video (for more codecs)
 - RPM Fusion free tainted (repo)
 - libdvdcss (support for copyrighted DVDs)
 - RPM Fusion nonfree tainted (repo)
@@ -38,6 +37,15 @@ dnf-mod.sh options:
 - set maximum simultaneous downloads to 10
 - bring in your own dnf.conf changes
 ______________________________________________________
+
+codec-setup.sh options:
+- additional general multimedia codecs
+- libdvdcss/DVD compatibility
+- AMD freeworld driver
+- Nvidia vaapi driver
+- Intel media driver
+
+_______________________________________________________
 
 This needs to be enabled on start.sh:
 ![Screenshot from 2023-01-17 00-41-11](https://user-images.githubusercontent.com/95959450/212780926-f5806457-5b99-4c5c-9b70-ef21296ea32e.png)
