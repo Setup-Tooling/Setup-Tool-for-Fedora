@@ -40,7 +40,7 @@ dnf-mod.sh options:
 ______________________________________________________
 
 codec-setup.sh options:
-- additional general multimedia codecs
+- additional general multimedia codecs (still work in progress, breaks something)
 - libdvdcss/DVD compatibility
 - AMD freeworld driver
 - Nvidia vaapi driver
