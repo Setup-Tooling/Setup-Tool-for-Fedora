@@ -27,7 +27,8 @@ repo-setup.sh gives you the option to install:
 
 ______________________________________________________
 
-package-installer.sh allows you to type in programs you want installed
+package-installer.sh:
+allows you to type in programs you want installed
 and it then searches for those packages with dnf and flatpak
 and then installs them.
 ______________________________________________________
