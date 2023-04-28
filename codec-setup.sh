@@ -15,22 +15,22 @@ do
             ;;
             
 "DVD support")
-            sudo dnf install libdvdcss
+            sudo dnf install -y libdvdcss
             ;;
             
       "AMD")
-            sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld
-            sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
-            sudo dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
-            sudo dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
+            sudo dnf swap -y mesa-va-drivers mesa-va-drivers-freeworld
+            sudo dnf swap -y mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
+            sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
+            sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
             ;;
             
    "Nvidia")
-            sudo dnf install nvidia-vaapi-driver
+            sudo dnf install -y nvidia-vaapi-driver
             ;;
       
    "Intel")
-            sudo dnf install intel-media-driver
+            sudo dnf install -y intel-media-driver
             ;;
       
     "Quit")
