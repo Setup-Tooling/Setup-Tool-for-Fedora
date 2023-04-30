@@ -1,6 +1,4 @@
-# BurningPho3nix setup script for Fedora (optimized for Fedora 38)
-
-This project helps you installing RPM-Fusion, making dnf.conf changes and installing applications quickly on Fedora.
+# BurningPho3nix setup script for Fedora TESTING
 
 _______________________________________________________
 
