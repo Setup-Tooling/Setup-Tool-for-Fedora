@@ -162,11 +162,7 @@ case $OPTION in
     done
         ;;
     4)
-        soption=$(whiptail --title "Option" --inputbox "Enter your desired options" 8 40 3>&1 1>&2 2>&3)
-                exit_status=$?
-                if [ $exit_status = 0 ]; then
         ## PLACEHOLDER
-        fi
         ;;
     5)
         whiptail --msgbox "Exiting script..." 8 40
