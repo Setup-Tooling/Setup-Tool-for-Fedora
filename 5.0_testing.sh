@@ -166,6 +166,7 @@ case $OPTION in
                 exit_status=$?
                 if [ $exit_status = 0 ]; then
         ## PLACEHOLDER
+        fi
         ;;
     5)
         whiptail --msgbox "Exiting script..." 8 40
