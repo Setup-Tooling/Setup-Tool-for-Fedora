@@ -9,6 +9,10 @@ after that open the containing folder in terminal and type in:
 sudo ./5.0_testing.sh
 
 _______________________________________________________
+
+This version of the script still includes code from the old package-installer.sh script.
+
+_______________________________________________________
 DISCLAIMER
 
 THIS PROJECT HAS NO RELATION TO THE FEDORA PROJECT NOR THE RPM FUSION PROJECT NOR TO FLATHUB.
