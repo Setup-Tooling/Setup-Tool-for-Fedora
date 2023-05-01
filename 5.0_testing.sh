@@ -6,7 +6,7 @@ OPTION=$(whiptail --title "Menu" --menu "Choose an option" 15 60 5 \
 "1" "Repo Setup" \
 "2" "DNF modification tool" \
 "3" "Codec Setup" \
-"4" "Package Install Helper" \
+"4" "Package Install Helper (not working right now)" \
 "5" "Quit" \
 3>&1 1>&2 2>&3)
 
