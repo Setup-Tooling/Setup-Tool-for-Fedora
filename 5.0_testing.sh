@@ -163,6 +163,13 @@ case $OPTION in
         ;;
     4)
         ## PLACEHOLDER
+        if [ -f "package-installer.sh" ]; then
+         chmod +x package-installer.sh
+         sudo ./package-installer.sh
+        else
+         echo "The package-installer.sh script does not exist."
+        fi
+       
         ;;
     5)
         whiptail --msgbox "Exiting script..." 8 40
