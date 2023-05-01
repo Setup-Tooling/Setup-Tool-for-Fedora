@@ -36,7 +36,8 @@ do
         flatpak install $PACKAGE -y
     fi
 done
-
+        chmod +x package-installer.sh
+        sudo ./package-installer.sh
 echo "All packages have been installed (if possible)."
 
 
