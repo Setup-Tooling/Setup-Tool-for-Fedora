@@ -13,6 +13,12 @@ OPTION=$(whiptail --title "Menu" --menu "Choose an option" 15 60 5 \
 # Check which option was selected and perform the corresponding action
 case $OPTION in
     1)
+        # Ask for sudo password
+        password=$(whiptail --title "Sudo Password" --passwordbox "Please enter your sudo password:" 10 60 3>&1 1>&2 2>&3)
+
+        # Use sudo with the entered password
+        echo "$password" | sudo -S echo "This command is executed with sudo"
+        
         # Display a submenu with seven options for Repo Setup
         while true; do
         REPO_OPTION=$(whiptail --title "Repo Setup" --menu "Choose an option" 20 60 8 \
