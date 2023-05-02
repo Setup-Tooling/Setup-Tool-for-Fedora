@@ -5,6 +5,7 @@ This project helps you installing RPM-Fusion, making dnf.conf changes and instal
 ______________________________________________________
 
 Please read the README.md on older versions, if you use those, due to differences in the process
+
 ______________________________________________________
 
 start page options:
@@ -14,7 +15,7 @@ start page options:
 - reboot system
 ______________________________________________________
 
-repo-setup.sh gives you the option to install:
+Repo Setup gives you the options to install:
 - RPM Fusion free (repo)
 - RPM Fusion nonfree (repo)
 - Group core (to enable downloads through software centers)
@@ -27,19 +28,13 @@ repo-setup.sh gives you the option to install:
 
 ______________________________________________________
 
-package-installer.sh:
-- allows you to type in programs you want installed
-and it then searches for those packages with dnf and flatpak
-and then installs them.
-______________________________________________________
-
-dnf-mod.sh options:
+DNF modification tool options:
 - set default answer to Yes/Y
 - set maximum simultaneous downloads to 10
 - bring in your own dnf.conf changes
 ______________________________________________________
 
-codec-setup.sh options:
+Codec Setup options:
 - additional general multimedia codecs
 - libdvdcss/DVD compatibility
 - AMD freeworld driver
@@ -48,10 +43,16 @@ codec-setup.sh options:
 
 _______________________________________________________
 
-This needs to be enabled on start.sh:
+Package Install Helper:
+- allows you to type in programs you want installed
+and it then searches for those packages with dnf and flatpak
+and then installs them.
+______________________________________________________
+
+This needs to be enabled on setup.sh:
 ![Screenshot from 2023-01-17 00-41-11](https://user-images.githubusercontent.com/95959450/212780926-f5806457-5b99-4c5c-9b70-ef21296ea32e.png)
 
-after that open the containing folder in terminal and type in ./5.0_testing.sh or in Gnome just right-click and "run as program"
+after that open the containing folder in terminal and type in ./setup.sh or in Gnome just right-click and "run as program"
 
 _______________________________________________________
 
