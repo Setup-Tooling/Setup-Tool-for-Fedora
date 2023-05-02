@@ -1,9 +1,9 @@
 #!/bin/bash
 
-        # Ask for sudo password
+# Ask for sudo password
         password=$(whiptail --title "Sudo Password" --passwordbox "Please enter your sudo password:" 10 60 3>&1 1>&2 2>&3)
 
-        # Use sudo with the entered password
+# Use sudo with the entered password
         echo "$password" | sudo -S echo "This command is executed with sudo"
         
 
@@ -88,15 +88,15 @@ case $OPTION in
                 {
                 echo 0
                 sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-                echo 16.66
+                echo 16
                 sudo dnf groupupdate -y core
-                echo 33.33
+                echo 33
                 sudo dnf install -y rpmfusion-free-release-tainted
                 echo 50
                 sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-                echo 66.66
+                echo 66
                 sudo dnf install -y rpmfusion-nonfree-release-tainted
-                echo 83.33
+                echo 83
                 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
                 echo 100
                 sleep 1
@@ -176,24 +176,54 @@ case $OPTION in
         # Check which option was selected and perform the corresponding action
         case $CODEC_OPTION in
             1)
+            {
+            echo 0
                 sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
+            echo 33
                 sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+            echo 66
                 sudo dnf groupupdate -y sound-and-video
+            echo 100
+            sleep 1
+                } | whiptail --gauge "Installing Codecs" 6 60 0
                 ;;
             2)
+            {
+            echo 0
                 sudo dnf install -y libdvdcss
+            echo 100
+            sleep 1
+                } | whiptail --gauge "Installing Driver" 6 60 0
                 ;;
             3)
+            {
+            echo 0   
                 sudo dnf swap -y mesa-va-drivers mesa-va-drivers-freeworld
+            echo 25    
                 sudo dnf swap -y mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
+            echo 50    
                 sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
+            echo 75    
                 sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
+            echo 100
+            sleep 1
+               } | whiptail --gauge "Installing Drivers" 6 60 0
                 ;;
             4)
+            {
+            echo 0
                sudo dnf install -y nvidia-vaapi-driver
+            echo 100
+            sleep 1
+                } | whiptail --gauge "Installing Driver" 6 60 0
                 ;;
             5)
+            {
+            echo 0
                sudo dnf install -y intel-media-driver
+            echo 100
+            sleep 1
+                } | whiptail --gauge "Installing Driver" 6 60 0
                 ;;
             6)
                 break
