@@ -20,7 +20,6 @@ Repo Setup gives you the options to install:
 - RPM Fusion nonfree (repo)
 - Group core (to enable downloads through software centers)
 - RPM Fusion free tainted (repo)
-- libdvdcss (support for copyrighted DVDs)
 - RPM Fusion nonfree tainted (repo)
 - all of the above
 - system updates (dnf update)
