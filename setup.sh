@@ -276,11 +276,12 @@ done
        
         ;;
     5)
-        whiptail --msgbox "Updating system" 8 40
+        echo Updating System
         sudo dnf update -y && flatpak update
+        echo Updates finished
         ;;
     6)
-        whiptail --msgbox "Rebooting system..." 8 40
+        echo Rebooting system...
         reboot
         ;;
     7)
