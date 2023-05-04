@@ -14,7 +14,9 @@ OPTION=$(whiptail --title "Menu" --menu "Choose an option" 15 60 5 \
 "2" "DNF modification tool" \
 "3" "Codec Setup" \
 "4" "Package Install Helper" \
-"5" "Quit" \
+"5" "Update" \
+"6" "Reboot" \
+"7" "Quit" \
 3>&1 1>&2 2>&3)
 
 # Check which option was selected and perform the corresponding action
@@ -274,6 +276,14 @@ done
        
         ;;
     5)
+        whiptail --msgbox "Updating system" 8 40
+        sudo dnf update -y && flatpak update
+        ;;
+    6)
+        whiptail --msgbox "Rebooting system..." 8 40
+        reboot
+        ;;
+    7)
         whiptail --msgbox "Exiting script..." 8 40
         exit 0
         ;;
