@@ -286,8 +286,12 @@ done
        } | whiptail --gauge "Updating System" 6 60 0
         ;;
     6)
+      {
         echo Rebooting system...
         reboot
+        echo Rebooting system...
+         sleep 1
+       } | whiptail --gauge "Rebooting system..." 6 60 0
         ;;
     7)
         whiptail --msgbox "Exiting script..." 8 40
