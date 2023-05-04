@@ -276,9 +276,11 @@ done
        
         ;;
     5)
-        echo Updating System
-        sudo dnf update -y && flatpak update
-        echo Updates finished
+        echo 0
+        sudo dnf update -y
+        echo 50
+        flatpak update -y
+        echo 100
         ;;
     6)
         echo Rebooting system...
