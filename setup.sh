@@ -276,11 +276,14 @@ done
        
         ;;
     5)
+      {
         echo 0
         sudo dnf update -y
         echo 50
         flatpak update -y
         echo 100
+        sleep 1
+       } | whiptail --gauge "Updating System" 6 60 0
         ;;
     6)
         echo Rebooting system...
