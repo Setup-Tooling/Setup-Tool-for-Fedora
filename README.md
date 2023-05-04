@@ -12,6 +12,7 @@ start page options:
 - open repo-setup.sh
 - open package-installer
 - open dnf-mod.sh
+- system updates (dnf update & flatpak update)
 - reboot system
 ______________________________________________________
 
@@ -22,7 +23,6 @@ Repo Setup gives you the options to install:
 - RPM Fusion free tainted (repo)
 - RPM Fusion nonfree tainted (repo)
 - all of the above
-- system updates (dnf update)
 - Flathub (repo) (not needed on F38 and later, if third party repos are enabled)
 
 ______________________________________________________
