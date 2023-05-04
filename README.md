@@ -22,8 +22,8 @@ Repo Setup gives you the options to install:
 - Group core (to enable downloads through software centers)
 - RPM Fusion free tainted (repo)
 - RPM Fusion nonfree tainted (repo)
-- all of the above
 - Flathub (repo) (not needed on F38 and later, if third party repos are enabled)
+- all of the above
 
 ______________________________________________________
 
