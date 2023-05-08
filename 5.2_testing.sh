@@ -244,8 +244,11 @@ if command -v dnf &> /dev/null; then
     PACKAGE_MANAGER="dnf"
 elif command -v flatpak &> /dev/null; then
     PACKAGE_MANAGER="flatpak"
+elif command -v snap &> /dev/null
+then
+    PACKAGE_MANAGER="snap"
 else
-    whiptail --title "Error" --msgbox "Neither dnf nor flatpak is available on this system." 10 40
+    whiptail --title "Error" --msgbox "Neither dnf, flatpak, nor snap is available on this system." 10 40
     exit 1
 fi
 
@@ -266,11 +269,16 @@ for PACKAGE in $PACKAGES; do
         elif command -v flatpak &> /dev/null; then
             whiptail --title "Package Installation" --msgbox "$PACKAGE not found in system repositories, attempting to install using flatpak." 10 60
             flatpak install $PACKAGE -y >/dev/null 2>&1
+         elif command -v snap &> /dev/null; then
+            whiptail --title "Package Installation" --msgbox "$PACKAGE not found in system repositories and flatpak attempting to install using snap." 10 60
+            snap install $PACKAGE >/dev/null 2>&1
         else
-            whiptail --title "Error" --msgbox "$PACKAGE not found in system repositories, and flatpak is not available on this system." 10 60
+            whiptail --title "Error" --msgbox "$PACKAGE not found in system repositories and flatpak and snap is not available on this system." 10 60
         fi
     elif [ "$PACKAGE_MANAGER" = "flatpak" ]; then
         flatpak install $PACKAGE -y >/dev/null 2>&1
+    elif [ "$PACKAGE_MANAGER" = "snap" ]; then
+        snap install $PACKAGE >/dev/null 2>&1
     fi
 done
 ;;
