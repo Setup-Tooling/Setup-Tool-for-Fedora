@@ -91,11 +91,11 @@ case $OPTION in
                 echo 0
                 sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
                 echo 16
-                sudo dnf groupupdate -y core
-                echo 33
-                sudo dnf install -y rpmfusion-free-release-tainted
-                echo 50
                 sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+                echo 33
+                sudo dnf groupupdate -y core
+                echo 50
+                sudo dnf install -y rpmfusion-free-release-tainted
                 echo 66
                 sudo dnf install -y rpmfusion-nonfree-release-tainted
                 echo 83
