@@ -239,16 +239,20 @@ case $OPTION in
         ;;
     4)
         ## PLACEHOLDER
-        if command -v dnf &> /dev/null
+         if command -v dnf &> /dev/null
 then
     PACKAGE_MANAGER="dnf"
 elif command -v flatpak &> /dev/null
 then
     PACKAGE_MANAGER="flatpak"
+elif command -v snap &> /dev/null
+then
+    PACKAGE_MANAGER="snap"
 else
-    echo "Error: Neither dnf nor flatpak is available on this system."
+    echo "Error: Neither dnf, flatpak, nor snap is available on this system."
     exit 1
 fi
+
 # Prompt the user to enter the packages they want to install
 read -p "Enter the names of packages you want to install (separated by spaces): " PACKAGES
 
@@ -265,15 +269,21 @@ do
         then
             echo "$PACKAGE not found in system repositories, attempting to install using flatpak..."
             flatpak install $PACKAGE -y
+        elif command -v snap &> /dev/null
+        then
+            echo "$PACKAGE not found in system repositories, attempting to install using snap..."
+            snap install $PACKAGE
         else
-            echo "Error: $PACKAGE not found in system repositories, and flatpak is not available on this system."
+            echo "Error: $PACKAGE not found in system repositories, and neither flatpak nor snap is available on this system."
         fi
     elif [ "$PACKAGE_MANAGER" = "flatpak" ]
     then
         flatpak install $PACKAGE -y
+    elif [ "$PACKAGE_MANAGER" = "snap" ]
+    then
+        snap install $PACKAGE
     fi
 done
-       
         ;;
     5)
       {
