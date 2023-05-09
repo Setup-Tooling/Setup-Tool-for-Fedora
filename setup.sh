@@ -238,8 +238,6 @@ case $OPTION in
     done
         ;;
     4)
-        ## PLACEHOLDER
-       # Check if either dnf or flatpak is available
 if command -v dnf &> /dev/null; then
     PACKAGE_MANAGER="dnf"
 elif command -v flatpak &> /dev/null; then
