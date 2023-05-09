@@ -262,16 +262,21 @@ if [ $? -ne 0 ] || [ -z "$PACKAGES" ]; then
 fi
 
 # Attempt to install each package using the appropriate package manager
+{
+echo 0
 for PACKAGE in $PACKAGES; do
     if [ "$PACKAGE_MANAGER" = "dnf" ]; then
         if dnf search -C $PACKAGE | grep -q "^$PACKAGE" >/dev/null 2>&1; then
             sudo dnf install $PACKAGE -y
+ echo 33
         elif command -v flatpak &> /dev/null; then
             whiptail --title "Package Installation" --msgbox "$PACKAGE not found in system repositories, attempting to install using flatpak." 10 60
             flatpak install $PACKAGE -y
+ echo 66
          elif command -v snap &> /dev/null; then
             whiptail --title "Package Installation" --msgbox "$PACKAGE not found in system repositories and flatpak attempting to install using snap." 10 60
             snap install $PACKAGE
+ echo 100
         else
             whiptail --title "Error" --msgbox "$PACKAGE not found in system repositories and flatpak and snap is not available on this system." 10 60
         fi
@@ -280,6 +285,8 @@ for PACKAGE in $PACKAGES; do
     elif [ "$PACKAGE_MANAGER" = "snap" ]; then
         snap install $PACKAGE
     fi
+ sleep 1
+ } | whiptail --gauge "Installing Packages" 6 60 0
 done
 ;;
     5)
