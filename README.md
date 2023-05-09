@@ -54,10 +54,6 @@ This needs to be enabled on setup.sh:
 after that open the containing folder in terminal and type in ./setup.sh or in Gnome just right-click and "run as program"
 
 _______________________________________________________
-
-This version of the script still includes code from the old package-installer.sh script.
-
-_______________________________________________________
 DISCLAIMER
 
 THIS PROJECT HAS NO RELATION TO THE FEDORA PROJECT NOR THE RPM FUSION PROJECT NOR TO FLATHUB.
