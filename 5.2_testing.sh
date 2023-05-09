@@ -285,9 +285,9 @@ for PACKAGE in $PACKAGES; do
     elif [ "$PACKAGE_MANAGER" = "snap" ]; then
         snap install $PACKAGE
     fi
- sleep 1
- } | whiptail --gauge "Installing Packages" 6 60 0
 done
+sleep 1
+ } | whiptail --gauge "Installing Packages" 6 60 0
 ;;
     5)
       {
