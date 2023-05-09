@@ -44,7 +44,7 @@ _______________________________________________________
 
 Package Install Helper:
 - allows you to type in programs you want installed
-and it then searches for those packages with dnf and flatpak
+and it then searches for those packages with dnf, flatpak and snap
 and then installs them.
 ______________________________________________________
 
@@ -52,10 +52,6 @@ This needs to be enabled on setup.sh:
 ![Screenshot from 2023-01-17 00-41-11](https://user-images.githubusercontent.com/95959450/212780926-f5806457-5b99-4c5c-9b70-ef21296ea32e.png)
 
 after that open the containing folder in terminal and type in ./setup.sh or in Gnome just right-click and "run as program"
-
-_______________________________________________________
-
-This version of the script still includes code from the old package-installer.sh script.
 
 _______________________________________________________
 DISCLAIMER
