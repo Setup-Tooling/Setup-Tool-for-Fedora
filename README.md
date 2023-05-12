@@ -1,6 +1,6 @@
 # BurningPho3nix setup script for Fedora (optimized for Fedora 38)
 
-This project helps you installing RPM-Fusion, making dnf.conf changes and installing applications quickly on Fedora.
+This project helps you installing RPM-Fusion, making dnf.conf changes and installing applications and codecs quickly on Fedora.
 
 ______________________________________________________
 
@@ -9,9 +9,10 @@ Please read the README.md on older versions, if you use those, due to difference
 ______________________________________________________
 
 start page options:
-- open repo-setup.sh
+- open repo setup
 - open package-installer
-- open dnf-mod.sh
+- open DNF configuration
+- open codec setup
 - system updates (dnf update & flatpak update)
 - reboot system
 ______________________________________________________
