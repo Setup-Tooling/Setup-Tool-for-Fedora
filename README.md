@@ -2,15 +2,7 @@
 
 _______________________________________________________
 
-This needs to be enabled on 5.2_testing.sh:
-![Screenshot from 2023-01-17 00-41-11](https://user-images.githubusercontent.com/95959450/212780926-f5806457-5b99-4c5c-9b70-ef21296ea32e.png)
-
-after that open the containing folder in terminal and type in:
-./5.2_testing.sh
-
-_______________________________________________________
-
-This version of the script still includes code from the old package-installer.sh script.
+The files in this branch may not be finished and may contain bugs.
 
 _______________________________________________________
 DISCLAIMER
