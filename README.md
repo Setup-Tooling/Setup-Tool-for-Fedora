@@ -7,6 +7,7 @@ The files in this branch may not be finished and may contain bugs.
 _______________________________________________________
 
 To-Do-list:
+1.0.0c:
 - [ ] complete C rewrite
 - [x] implementing Repo Setup
 - [x] implementing dnf.conf modification
@@ -18,6 +19,9 @@ To-Do-list:
 - [x] implementing update function
 - [x] implementing reboot funktion
 - [x] implementing quit/exit option
+
+2.0.0c:
+- [ ] making GUI
 
 _______________________________________________________
 DISCLAIMER
