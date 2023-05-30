@@ -5,6 +5,21 @@ _______________________________________________________
 The files in this branch may not be finished and may contain bugs.
 
 _______________________________________________________
+
+To-Do-list:
+- [-] complete C rewrite
+- [x] implementing Repo Setup
+- [x] implementing dnf.conf modification
+- [ ] implementing Codec Setup
+- [-] Package Install Helper
+- [x] -> dnf functionality
+- [ ] -> flatpak functionality
+- [ ] -> snap functionality
+- [x] implementing update function
+- [x] implementing reboot funktion
+- [x] implementing quit/exit option
+
+_______________________________________________________
 DISCLAIMER
 
 THIS PROJECT HAS NO RELATION TO THE FEDORA PROJECT NOR THE RPM FUSION PROJECT NOR TO FLATHUB.
