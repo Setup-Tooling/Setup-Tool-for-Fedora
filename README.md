@@ -9,17 +9,18 @@ _______________________________________________________
 To-Do-list:
 
 1.0.0c:
-- [ ] complete C rewrite
+- [x] complete C rewrite
 - [x] implementing Repo Setup
 - [x] implementing dnf.conf modification
 - [x] implementing Codec Setup
-- [ ] Package Install Helper
+- [x] Package Install Helper
 - [x] -> dnf functionality
-- [ ] -> flatpak functionality
-- [ ] -> snap functionality
+- [x] -> flatpak functionality
+- [x] -> snap functionality
 - [x] implementing update function
 - [x] implementing reboot funktion
 - [x] implementing quit/exit option
+- [ ] bug fixing (if needed)
 
 2.0.0c:
 - [ ] making GUI
