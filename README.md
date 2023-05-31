@@ -12,7 +12,7 @@ To-Do-list:
 - [ ] complete C rewrite
 - [x] implementing Repo Setup
 - [x] implementing dnf.conf modification
-- [ ] implementing Codec Setup
+- [x] implementing Codec Setup
 - [ ] Package Install Helper
 - [x] -> dnf functionality
 - [ ] -> flatpak functionality
