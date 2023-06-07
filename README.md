@@ -8,7 +8,7 @@ _______________________________________________________
 
 To-Do-list:
 
-1.0.0c:
+1.0.0c: RELEASED
 - [x] complete C rewrite
 - [x] implementing Repo Setup
 - [x] implementing dnf.conf modification
@@ -23,11 +23,13 @@ To-Do-list:
 - [x] implementing update function
 - [x] implementing reboot funktion
 - [x] implementing quit/exit option
-- [ ] bug fixing (if needed)
+- [x] bug fixing (if needed)
+
+1.5.0c:
+- [ ] adding TUI version
 
 2.0.0c:
-- [ ] making GUI
-
+- [ ] adding GUI version
 _______________________________________________________
 DISCLAIMER
 
