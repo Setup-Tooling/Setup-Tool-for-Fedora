@@ -55,7 +55,7 @@ If you install the RPM just type "setup-tool" in the terminal!!!
 This needs to be enabled on setup.sh:
 ![Screenshot from 2023-01-17 00-41-11](https://user-images.githubusercontent.com/95959450/212780926-f5806457-5b99-4c5c-9b70-ef21296ea32e.png)
 
-after that open the containing folder in terminal and type in ./setup.sh or in Gnome just right-click and "run as program"
+after that open the containing folder in terminal and type in ./setup-tool or in Gnome just right-click and "run as program"
 
 _______________________________________________________
 DISCLAIMER
