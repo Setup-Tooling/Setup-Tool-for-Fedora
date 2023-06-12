@@ -50,6 +50,17 @@ Package Management Helper:
 
 ______________________________________________________
 
+Premade scripts:
+- Gaming AMD
+- Gaming Nvidia
+- Gaming Intel
+- Streaming AMD
+- Streaming Nvidia
+- Streaming Intel
+- Office
+
+______________________________________________________
+
 If you install the RPM just type "setup-tool" in the terminal!!!
 
 NOW AVAILABLE ON COPR!!!
