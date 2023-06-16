@@ -1,0 +1,17 @@
+[Desktop Entry]
+Comment[en_GB]=A simple setup program.
+Comment=A simple setup program.
+Exec=setup-tool
+GenericName[en_GB]=
+GenericName=
+Icon=setup-tool
+MimeType=
+Name[en_GB]=Setup-Tool
+Name=Setup-Tool
+Path=
+StartupNotify=true
+Terminal=true
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
