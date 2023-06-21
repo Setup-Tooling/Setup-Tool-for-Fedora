@@ -90,9 +90,9 @@ int main() {
 
     char* password = getSecurePassword();
 
-    char command[100];
-    char customOption[100];
-    char packageName[100];
+    char command[256];
+    char customOption[256];
+    char packageName[256];
 
     char sudoCommand[128];
     sprintf(sudoCommand, "echo '%s' | sudo -S echo 'This program is executed with sudo'", password);
