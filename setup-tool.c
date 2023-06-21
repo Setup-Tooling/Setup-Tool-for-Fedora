@@ -583,7 +583,7 @@ int main() {
             }
             case 7:{
                 if (dnfInstalled || flatpakInstalled || snapInstalled) {
-                    char updateCommand[500] = "sudo ";
+                    char updateCommand[512] = "sudo ";
                     if (dnfInstalled)
                         strcat(updateCommand, "dnf update -y ");
                     if (flatpakInstalled)
