@@ -9,6 +9,7 @@
 ## YEARLY TASKS
 * THE COUNCIL elects "THE LEADER" every year
 * "THE LEADER" is getting announced to the community on our social channels
+* Reviewing applications for new council members
 
 ## THE LEADER ELECTION
 * To be applicable for being elected as "THE LEADER", the following requirements need to be met:
@@ -37,6 +38,10 @@
 * THE COUNCIL has a meeting once every week, on a day that agreed upon in the last meeting
 * THE COUNCIL treats every decision agreed upon as public knowledge
 * Every member of THE COUNCIL prepares for every meeting, by looking at [Issues](https://github.com/BurningPho3nix/Setup-Tool-for-Fedora/issues) and [Pull requests](https://github.com/BurningPho3nix/Setup-Tool-for-Fedora/pulls) at least an hour before the meeting begins.
+* Optional topics:
+  - Council members going on vacation
+  - Council members leaving
+  - New Council members
 * THE COUNCIL elects a person to note all attendees, all topics, and their agreed-upon solutions
 * The note-taking person needs to note unsolved topics as well and needs to mark those as "unsolved" accordingly
 * The notes will get published, by an elected person, on our social channels
