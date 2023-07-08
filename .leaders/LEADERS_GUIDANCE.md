@@ -1,9 +1,8 @@
 # THIS DOCUMENT IS BINDING FOR ALL LEADERS
 
-"THE PROJECT LEADERS" are thereafter referred to as "THE COUNCIL"
-"THE LEADER" is leading THE COUNCIL
-
 ## PREAMBLE
+* "THE PROJECT LEADERS" are thereafter referred to as "THE COUNCIL"
+* "THE LEADER" is leading THE COUNCIL
 * BurningPho3nix is "THE LEADER" until another leader is elected
 * As soon as there is a functional council an election for THE LEADER will be done
 
