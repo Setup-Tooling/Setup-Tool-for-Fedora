@@ -12,7 +12,7 @@ By contributing to this project, you:
 * Agree that you have received the necessary permissions from your employer to make the contributions (if applicable)
 * Agree that the content you contribute may be provided under the Project license(s)
 * Agree that, if you did not author 100% of the content, the appropriate licenses and copyrights have been added along with any other necessary attribution.
-* Agree that BurningPho3nix may change the License for the whole project at his sole discretion, with the limitation that the changed license will still be a FOSS license
+* Agree that BurningPho3nix may change the License for the whole project at his sole discretion, with the limitation that the changed license will still be a FOSS license (probably MPL v2 or newer, a newer GPL license, or similar licenses)
 
 
 ## Getting started
