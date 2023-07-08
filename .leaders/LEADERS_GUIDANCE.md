@@ -40,3 +40,5 @@
 * Every member of THE COUNCIL prepares for every meeting, by looking at [Issues](https://github.com/BurningPho3nix/Setup-Tool-for-Fedora/issues) and [Pull requests](https://github.com/BurningPho3nix/Setup-Tool-for-Fedora/pulls) at least an hour before the meeting begins.
 * THE COUNCIL elects a person to note all attendees, all topics, and their agreed-upon solutions
 * The note-taking person needs to note unsolved topics as well and needs to mark those as "unsolved" accordingly
+* The notes will get published, by an elected person, on our social channels
+* 
