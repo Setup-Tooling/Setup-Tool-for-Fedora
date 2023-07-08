@@ -5,6 +5,7 @@
 * "THE LEADER" is leading THE COUNCIL
 * BurningPho3nix is "THE LEADER" until another leader is elected
 * As soon as there is a functional council an election for THE LEADER will be done
+* If any member of THE COUNCIL (including THE LEADER) violates [the Code of Conduct](https://github.com/Setup-Tooling/Setup-Tool-for-Fedora/blob/stable/CODE_OF_CONDUCT.md) or any of there limitations given hereafter, they immediately get kicked out of the council and lose all their rights
 
 ## YEARLY TASKS
 * THE COUNCIL elects "THE LEADER" every year
@@ -46,4 +47,3 @@
 * THE COUNCIL elects a person to note all attendees, all topics, and their agreed-upon solutions
 * The note-taking person needs to note unsolved topics as well and needs to mark those as "unsolved" accordingly
 * The notes will get published, by an elected person, on our social channels
-
