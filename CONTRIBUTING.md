@@ -34,7 +34,7 @@ Please keep in mind that open source software is built by people like you, who s
 Don't have time to contribute? No worries, here are some other ways to show your support for our project:
 
 - star the [project](<%= ask("homepage") %>)
-- State your support for .[our project](https://github.com/BurningPho3nix/Setup-Tool-for-Fedora) on Mastodon
+- State your support for [our project](https://github.com/BurningPho3nix/Setup-Tool-for-Fedora) on Mastodon
 
 
 ## Issues
@@ -65,7 +65,7 @@ Try to follow these guidelines:
 
 ### Creating an issue
 
-Check out .[Template-Folder](https://github.com/BurningPho3nix/Setup-Tool-for-Fedora/tree/stable/.github/ISSUE_TEMPLATE)
+Check out [Template-Folder](https://github.com/BurningPho3nix/Setup-Tool-for-Fedora/tree/stable/.github/ISSUE_TEMPLATE)
 
 
 ### Closing issues
@@ -96,4 +96,4 @@ At the very least, please try to:
 - Use backticks to wrap code. This ensures that it retains its formatting and isn't modified when it's rendered by GitHub, and makes the code more readable to others
 
 
-THIS FILE IS BASED OFF OF .[Base-File](https://github.com/generate/generate-contributing/blob/master/templates/contributing.md)
+THIS FILE IS BASED OFF OF [Base-File](https://github.com/generate/generate-contributing/blob/master/templates/contributing.md)
