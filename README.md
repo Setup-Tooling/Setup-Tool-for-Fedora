@@ -9,10 +9,11 @@ Please read the README.md on older versions, if you use those, due to difference
 ______________________________________________________
 
 start page options:
-- open repo setup
-- open package-installer
-- open DNF configuration
-- open codec setup
+- repo setup
+- DNF modification
+- Codec Setup 
+- package management
+- premade scripts
 - system updates (dnf update & flatpak update)
 - reboot system
 ______________________________________________________
