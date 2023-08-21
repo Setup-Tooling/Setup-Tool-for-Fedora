@@ -127,9 +127,10 @@ int main() {
                     printf("5. Install Flathub\n");
                     printf("6. Install All\n");
                     printf("7. Install and enable snapd\n");
-                    printf("8. Back to main menu\n");
+                    printf("8. Install All + snapd\n");
+                    printf("9. Back to main menu\n");
                     printf("Option: ");
-                    repoOption = getMenuOption(8);
+                    repoOption = getMenuOption(9);
 
                     switch (repoOption) {
                         case 1:
@@ -162,6 +163,16 @@ int main() {
                             runCommand("sudo ln -s /var/lib/snapd/snap /snap");
                             break;
                         case 8:
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm");
+                            runCommand("sudo dnf groupupdate -y core");
+                            runCommand("sudo dnf install -y rpmfusion-free-release-tainted");
+                            runCommand("sudo dnf install -y rpmfusion-nonfree-release-tainted");
+                            runCommand("flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo");
+                            runCommand("sudo dnf install -y snapd");
+                            runCommand("sudo ln -s /var/lib/snapd/snap /snap");
+                            break;
+                        case 9:
                             printf("Returning to main menu.\n");
                             break;
                         default:
@@ -169,7 +180,7 @@ int main() {
                             break;
                     }
 
-                    if (repoOption == 8) {
+                    if (repoOption == 9) {
                         break;
                     }
                 }
@@ -555,7 +566,6 @@ int main() {
 
                     switch (sysOption) {
                         case 1:
-                            runCommand("sudo dnf install -y neofetch");
                             runCommand("neofetch");
                             break;
                         case 2:
@@ -585,7 +595,7 @@ int main() {
                 if (dnfInstalled || flatpakInstalled || snapInstalled) {
                     char updateCommand[512] = "sudo ";
                     if (dnfInstalled)
-                        strcat(updateCommand, "dnf update -y ");
+                        strcat(updateCommand, "dnf update --refresh -y ");
                     if (flatpakInstalled)
                         strcat(updateCommand, "&& flatpak update -y ");
                     if (snapInstalled)
