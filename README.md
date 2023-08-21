@@ -26,6 +26,8 @@ Repo Setup gives you the options to install:
 - RPM Fusion nonfree tainted (repo)
 - Flathub (repo) (not needed on F38 and later, if third party repos are enabled)
 - all of the above
+- snapd
+- everything above including snapd
 
 ______________________________________________________
 
