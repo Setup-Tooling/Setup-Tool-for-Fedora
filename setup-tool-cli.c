@@ -287,7 +287,6 @@ int main() {
                 int packageOption;
                 int packageOptionLoop = 1;
                 while (packageOptionLoop) {
-                //while (1) {
                     printf("\n");
                     printf("Choose an option for Package Management Helper:\n");
                     printf("1. Install a package\n");
