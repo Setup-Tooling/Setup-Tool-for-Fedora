@@ -1,11 +1,23 @@
 #!/bin/bash
-
+extract_fedora_version() {
+    while IFS= read -r line; do
+        if [[ $line == VERSION_ID=* ]]; then
+            version="${line#*=}"
+            # Remove any extra characters or spaces
+            version="${version%%[!0-9]*}"
+            echo "$version"
+            return
+        fi
+    done < "/etc/os-release"
+}
 # Ask for sudo password
         password=$(whiptail --title "Sudo Password" --passwordbox "Please enter your sudo password:" 10 60 3>&1 1>&2 2>&3)
 
 # Use sudo with the entered password
         echo "$password" | sudo -S echo "This command is executed with sudo"
-        
+        fedora_version=$(extract_fedora_version)
+
+        echo "Fedora version: $fedora_version"
 
 # Use whiptail to display a menu with five options
 while true; do
@@ -17,8 +29,9 @@ OPTION=$(whiptail --title "Menu" --menu "Choose an option" 15 60 5 \
 "5" "Premade Scripts" \
 "6" "System Info" \
 "7" "Update" \
-"8" "Reboot" \
-"9" "Quit" \
+"8" "Systemupgrade" \
+"9" "Reboot" \
+"10" "Quit" \
 3>&1 1>&2 2>&3)
 
 # Check which option was selected and perform the corresponding action
@@ -43,12 +56,21 @@ case $OPTION in
             1)
                 # Perform action for Option 1 of Repo Setup
                 {
-                echo 0
-                sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-                echo 50
-                sudo dnf groupupdate -y core
-                echo 100
-                sleep 1
+                if [[ "$fedora_version" == "39" ]]; then
+                    echo 0
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm
+                    echo 50
+                    sudo dnf groupupdate -y core
+                    echo 100
+                    sleep 1
+                else
+                    echo 0
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm
+                    echo 50
+                    sudo dnf groupupdate -y core
+                    echo 100
+                    sleep 1
+                fi
                 } | whiptail --gauge "Installing Repo" 6 60 0
                 ;;
             2)
@@ -63,12 +85,21 @@ case $OPTION in
             3)
                 # Perform action for Option 3 of Repo Setup
                 {
-                echo 0
-                sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-                echo 50
-                sudo dnf groupupdate -y core
-                echo 100
-                sleep 1
+                if [[ "$fedora_version" == "39" ]]; then
+                    echo 0
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm
+                    echo 50
+                    sudo dnf groupupdate -y core
+                    echo 100
+                    sleep 1
+                else
+                    echo 0
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm
+                    echo 50
+                    sudo dnf groupupdate -y core
+                    echo 100
+                    sleep 1
+                fi
                 } | whiptail --gauge "Installing Repo" 6 60 0
                 ;;
             4)
@@ -93,9 +124,17 @@ case $OPTION in
                 # Perform action for Option 6 of Repo Setup
                 {
                 echo 0
-                sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm
+                fi
                 echo 16
-                sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm
+                fi
                 echo 33
                 sudo dnf groupupdate -y core
                 echo 50
@@ -121,9 +160,17 @@ case $OPTION in
             8)
                 {
                 echo 0
-                sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm
+                fi
                 echo 13
-                sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm
+                fi
                 echo 25
                 sudo dnf groupupdate -y core
                 echo 38
@@ -390,9 +437,17 @@ while "$packageOptionLoop"; do
             echo 0
                 sudo dnf config-manager --setopt=\"defaultyes=True\" --setopt=\"max_parallel_downloads=10\" --save
             echo 5
-                sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm
+                fi
             echo 11
-                sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm
+                fi
             echo 16
                 sudo dnf groupupdate -y core
             echo 21
@@ -434,9 +489,17 @@ while "$packageOptionLoop"; do
             echo 0
                 sudo dnf config-manager --setopt=\"defaultyes=True\" --setopt=\"max_parallel_downloads=10\" --save
             echo 6
-                sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm
+                fi
             echo 13
-                sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm
+                fi
             echo 19
                 sudo dnf groupupdate -y core
             echo 25
@@ -472,9 +535,17 @@ while "$packageOptionLoop"; do
             echo 0
                 sudo dnf config-manager --setopt=\"defaultyes=True\" --setopt=\"max_parallel_downloads=10\" --save
             echo 6
-                sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm
+                fi
             echo 13
-                sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm
+                fi
             echo 19
                 sudo dnf groupupdate -y core
             echo 25
@@ -510,9 +581,17 @@ while "$packageOptionLoop"; do
             echo 0
                 sudo dnf config-manager --setopt=\"defaultyes=True\" --setopt=\"max_parallel_downloads=10\" --save
             echo 5
-                sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm
+                fi
             echo 9
-                sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm
+                fi
             echo 14
                 sudo dnf groupupdate -y core
             echo 18
@@ -560,9 +639,17 @@ while "$packageOptionLoop"; do
             echo 0
                 sudo dnf config-manager --setopt=\"defaultyes=True\" --setopt=\"max_parallel_downloads=10\" --save
             echo 5
-                sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm
+                fi
             echo 11
-                sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm
+                fi
             echo 16
                 sudo dnf groupupdate -y core
             echo 21
@@ -604,9 +691,17 @@ while "$packageOptionLoop"; do
             echo 0
                 sudo dnf config-manager --setopt=\"defaultyes=True\" --setopt=\"max_parallel_downloads=10\" --save
             echo 5
-                sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm
+                fi
             echo 11
-                sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm
+                fi
             echo 16
                 sudo dnf groupupdate -y core
             echo 21
@@ -648,9 +743,17 @@ while "$packageOptionLoop"; do
             echo 0
                 sudo dnf config-manager --setopt=\"defaultyes=True\" --setopt=\"max_parallel_downloads=10\" --save
             echo 9
-                sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-            echo 18
-                sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm
+                fi
+                echo 18
+                if [[ "$fedora_version" == "39" ]]; then
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm
+                else
+                    sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm
+                fi
             echo 27
                 sudo dnf groupupdate -y core
             echo 36
@@ -681,6 +784,45 @@ while "$packageOptionLoop"; do
         esac
     done
         ;;
+
+    6)
+    while true; do
+        SYS_OPTION=$(whiptail --title "System Info" --menu "Choose an option" 20 60 8 \
+        "1" "Short, Quick Overview" \
+        "2" "PCI/PCIE Devices" \
+        "3" "USB Devices" \
+        "4" "Storage Devices" \
+        "5" "Back to main menu" \
+        3>&1 1>&2 2>&3)
+
+        # Check which option was selected and perform the corresponding action
+        case $SYS_OPTION in
+        1)
+                neofetch
+                sleep 10
+                ;;
+            2)
+                lspci
+                sleep 10
+                ;;
+            3)
+                lsusb
+                sleep 10
+                ;;
+            4)
+                df -H
+                sleep 10
+                ;;
+            5)
+                break
+                ;;
+        *)
+            # Display an error message if an invalid option is selected
+            whiptail --msgbox "Invalid option selected" 8 40
+            ;;
+        esac
+    done
+        ;;
     7)
       {
         echo 0
@@ -694,10 +836,22 @@ while "$packageOptionLoop"; do
        } | whiptail --gauge "Updating System" 6 60 0
         ;;
     8)
+        if [[ "$fedora_version" == "38" ]]; then
+            sudo dnf system-upgrade download --releasever=39
+            sudo dnf system-upgrade reboot
+        else if [[ "$fedora_version" == "37" ]]; then
+            sudo dnf system-upgrade download --releasever=39
+            sudo dnf system-upgrade reboot
+        else
+            break
+        fi
+        fi
+        ;;
+    9)
         echo Rebooting system...
         reboot
         ;;
-    9)
+    10)
         whiptail --msgbox "Exiting script..." 8 40
         exit 0
         ;;
