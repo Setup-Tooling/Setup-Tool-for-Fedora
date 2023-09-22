@@ -77,6 +77,28 @@ int getMenuOption(int maxOption) {
     return option;
 }
 
+// Function to extract the Fedora version from /etc/os-release
+void extractFedoraVersion(char *version) {
+    FILE *file = fopen("/etc/os-release", "r");
+    if (file == NULL) {
+        perror("Could not open /etc/os-release");
+        exit(EXIT_FAILURE);
+    }
+
+    char line[100];
+    while (fgets(line, sizeof(line), file)) {
+        if (strncmp(line, "VERSION_ID=", 11) == 0) {
+            strcpy(version, line + 11);
+            char *newline = strchr(version, '\n');
+            if (newline != NULL)
+                *newline = '\0';
+            break;
+        }
+    }
+
+    fclose(file);
+}
+
 int main() {
     bool flatpakInstalled = commandExists("flatpak --version");
     bool snapInstalled = commandExists("snap --version");
@@ -94,10 +116,14 @@ int main() {
     char customOption[256];
     char packageName[256];
     char sudoCommand[256];
+    char version[20];
+
+
+    extractFedoraVersion(version);
 
     sprintf(sudoCommand, "echo '%s' | sudo -S echo 'This program is executed with sudo'", password);
     runCommand(sudoCommand);
-
+    printf("Fedora version: %s\n", version);
 
         while (1) {
         printf("\n");
@@ -109,10 +135,11 @@ int main() {
         printf("5. Premade Scripts\n");
         printf("6. System Info\n");
         printf("7. Update\n");
-        printf("8. Reboot\n");
-        printf("9. Quit\n");
+        printf("8. Systemupgrade\n");
+        printf("9. Reboot\n");
+        printf("10. Quit\n");
         printf("Option: ");
-        option = getMenuOption(9);
+        option = getMenuOption(10);
 
         switch (option) {
             case 1: {
@@ -134,15 +161,25 @@ int main() {
 
                     switch (repoOption) {
                         case 1:
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm");
+                            if (strcmp(version, "39") == 0) {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm");
                             runCommand("sudo dnf groupupdate -y core");
+                        } else {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm");
+                            runCommand("sudo dnf groupupdate -y core");
+                        }
                             break;
                         case 2:
                             runCommand("sudo dnf install -y rpmfusion-free-release-tainted");
                             break;
                         case 3:
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm");
+                           if (strcmp(version, "39") == 0) {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm");
                             runCommand("sudo dnf groupupdate -y core");
+                        } else {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm");
+                            runCommand("sudo dnf groupupdate -y core");
+                        }
                             break;
                         case 4:
                             runCommand("sudo dnf install -y rpmfusion-nonfree-release-tainted");
@@ -151,9 +188,15 @@ int main() {
                             runCommand("flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo");
                             break;
                         case 6:
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm");
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm");
+                            if (strcmp(version, "39") == 0) {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm");
                             runCommand("sudo dnf groupupdate -y core");
+                        } else {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm");
+                            runCommand("sudo dnf groupupdate -y core");
+                        }
                             runCommand("sudo dnf install -y rpmfusion-free-release-tainted");
                             runCommand("sudo dnf install -y rpmfusion-nonfree-release-tainted");
                             runCommand("flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo");
@@ -163,9 +206,15 @@ int main() {
                             runCommand("sudo ln -s /var/lib/snapd/snap /snap");
                             break;
                         case 8:
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm");
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm");
+                            if (strcmp(version, "39") == 0) {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm");
                             runCommand("sudo dnf groupupdate -y core");
+                        } else {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm");
+                            runCommand("sudo dnf groupupdate -y core");
+                        }
                             runCommand("sudo dnf install -y rpmfusion-free-release-tainted");
                             runCommand("sudo dnf install -y rpmfusion-nonfree-release-tainted");
                             runCommand("flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo");
@@ -402,9 +451,15 @@ int main() {
                     switch (scriptOption) {
                         case 1:
                             runCommand("sudo dnf config-manager --setopt=\"defaultyes=True\" --setopt=\"max_parallel_downloads=10\" --save");
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm");
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm");
+                             if (strcmp(version, "39") == 0) {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm");
                             runCommand("sudo dnf groupupdate -y core");
+                        } else {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm");
+                            runCommand("sudo dnf groupupdate -y core");
+                        }
                             runCommand("sudo dnf install -y rpmfusion-free-release-tainted");
                             runCommand("sudo dnf install -y rpmfusion-nonfree-release-tainted");
                             runCommand("flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo");
@@ -423,9 +478,15 @@ int main() {
                             break;
                         case 2:
                             runCommand("sudo dnf config-manager --setopt=\"defaultyes=True\" --setopt=\"max_parallel_downloads=10\" --save");
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm");
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm");
+                             if (strcmp(version, "39") == 0) {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm");
                             runCommand("sudo dnf groupupdate -y core");
+                        } else {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm");
+                            runCommand("sudo dnf groupupdate -y core");
+                        }
                             runCommand("sudo dnf install -y rpmfusion-free-release-tainted");
                             runCommand("sudo dnf install -y rpmfusion-nonfree-release-tainted");
                             runCommand("flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo");
@@ -441,9 +502,15 @@ int main() {
                             break;
                         case 3:
                             runCommand("sudo dnf config-manager --setopt=\"defaultyes=True\" --setopt=\"max_parallel_downloads=10\" --save");
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm");
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm");
+                             if (strcmp(version, "39") == 0) {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm");
                             runCommand("sudo dnf groupupdate -y core");
+                        } else {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm");
+                            runCommand("sudo dnf groupupdate -y core");
+                        }
                             runCommand("sudo dnf install -y rpmfusion-free-release-tainted");
                             runCommand("sudo dnf install -y rpmfusion-nonfree-release-tainted");
                             runCommand("flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo");
@@ -459,9 +526,15 @@ int main() {
                             break;
                         case 4:
                             runCommand("sudo dnf config-manager --setopt=\"defaultyes=True\" --setopt=\"max_parallel_downloads=10\" --save");
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm");
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm");
+                             if (strcmp(version, "39") == 0) {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm");
                             runCommand("sudo dnf groupupdate -y core");
+                        } else {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm");
+                            runCommand("sudo dnf groupupdate -y core");
+                        }
                             runCommand("sudo dnf install -y rpmfusion-free-release-tainted");
                             runCommand("sudo dnf install -y rpmfusion-nonfree-release-tainted");
                             runCommand("flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo");
@@ -483,9 +556,15 @@ int main() {
                             break;
                         case 5:
                             runCommand("sudo dnf config-manager --setopt=\"defaultyes=True\" --setopt=\"max_parallel_downloads=10\" --save");
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm");
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm");
+                             if (strcmp(version, "39") == 0) {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm");
                             runCommand("sudo dnf groupupdate -y core");
+                        } else {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm");
+                            runCommand("sudo dnf groupupdate -y core");
+                        }
                             runCommand("sudo dnf install -y rpmfusion-free-release-tainted");
                             runCommand("sudo dnf install -y rpmfusion-nonfree-release-tainted");
                             runCommand("flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo");
@@ -504,9 +583,15 @@ int main() {
                             break;
                         case 6:
                             runCommand("sudo dnf config-manager --setopt=\"defaultyes=True\" --setopt=\"max_parallel_downloads=10\" --save");
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm");
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm");
+                             if (strcmp(version, "39") == 0) {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm");
                             runCommand("sudo dnf groupupdate -y core");
+                        } else {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm");
+                            runCommand("sudo dnf groupupdate -y core");
+                        }
                             runCommand("sudo dnf install -y rpmfusion-free-release-tainted");
                             runCommand("sudo dnf install -y rpmfusion-nonfree-release-tainted");
                             runCommand("flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo");
@@ -525,9 +610,15 @@ int main() {
                             break;
                         case 7:
                             runCommand("sudo dnf config-manager --setopt=\"defaultyes=True\" --setopt=\"max_parallel_downloads=10\" --save");
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm");
-                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm");
+                             if (strcmp(version, "39") == 0) {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm");
                             runCommand("sudo dnf groupupdate -y core");
+                        } else {
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm");
+                            runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm");
+                            runCommand("sudo dnf groupupdate -y core");
+                        }
                             runCommand("sudo dnf install -y rpmfusion-free-release-tainted");
                             runCommand("sudo dnf install -y rpmfusion-nonfree-release-tainted");
                             runCommand("flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo");
@@ -607,9 +698,22 @@ int main() {
                 break;
             }
             case 8:
-                runCommand("sudo reboot");
+                 if (strcmp(version, "38") == 0) {
+                    // Code for Fedora 38
+                    runCommand("sudo dnf system-upgrade download --releasever=39");
+                    runCommand("sudo dnf system-upgrade reboot");
+                } else if (strcmp(version, "37") == 0) {
+                    // Code for Fedora 37
+                    runCommand("sudo dnf system-upgrade download --releasever=39");
+                    runCommand("sudo dnf system-upgrade reboot");
+                } else {
+                    break;
+                }
                 break;
             case 9:
+                runCommand("sudo reboot");
+                break;
+            case 10:
                 printf("Quitting the program.\n");
                 exit(0);
             default:
@@ -617,6 +721,6 @@ int main() {
                 break;
             }
         }
-    if (option == 9)
+    if (option == 10)
     return 0;
 }
