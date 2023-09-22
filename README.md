@@ -13,7 +13,8 @@ start page options:
 - Codec Setup 
 - package management
 - premade scripts
-- system updates (dnf update & flatpak update)
+- system updates (dnf update & flatpak update & snap refresh)
+- system upgrade
 - reboot system
 ______________________________________________________
 
