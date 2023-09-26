@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 extract_fedora_version() {
     while IFS= read -r line; do
         if [[ $line == VERSION_ID=* ]]; then
