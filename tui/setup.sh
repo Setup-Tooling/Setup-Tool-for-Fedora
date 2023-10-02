@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 extract_fedora_version() {
     while IFS= read -r line; do
         if [[ $line == VERSION_ID=* ]]; then
@@ -837,11 +837,13 @@ while "$packageOptionLoop"; do
         ;;
     8)
         if [[ "$fedora_version" == "38" ]]; then
-            sudo dnf system-upgrade download --releasever=39
-            sudo dnf system-upgrade reboot
+            sudo dnf --refresh upgrade
+            sudo dnf -y system-upgrade download --releasever=39
+            sudo dnf -y system-upgrade reboot
         else if [[ "$fedora_version" == "37" ]]; then
-            sudo dnf system-upgrade download --releasever=39
-            sudo dnf system-upgrade reboot
+            sudo dnf --refresh upgrade
+            sudo dnf -y system-upgrade download --releasever=39
+            sudo dnf -y system-upgrade reboot
         else
             break
         fi
