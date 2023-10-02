@@ -699,13 +699,13 @@ int main() {
             }
             case 8:
                  if (strcmp(version, "38") == 0) {
-                    // Code for Fedora 38
-                    runCommand("sudo dnf system-upgrade download --releasever=39");
-                    runCommand("sudo dnf system-upgrade reboot");
+                    runCommand("sudo dnf --refresh upgrade");
+                    runCommand("sudo dnf -y system-upgrade download --releasever=39");
+                    runCommand("sudo dnf -y system-upgrade reboot");
                 } else if (strcmp(version, "37") == 0) {
-                    // Code for Fedora 37
-                    runCommand("sudo dnf system-upgrade download --releasever=39");
-                    runCommand("sudo dnf system-upgrade reboot");
+                    runCommand("sudo dnf --refresh upgrade");
+                    runCommand("sudo dnf -y system-upgrade download --releasever=39");
+                    runCommand("sudo dnf -y system-upgrade reboot");
                 } else {
                     break;
                 }
