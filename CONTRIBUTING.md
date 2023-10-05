@@ -33,7 +33,7 @@ Please keep in mind that open source software is built by people like you, who s
 
 Don't have time to contribute? No worries, here are some other ways to show your support for our project:
 
-- star the [project](https://github.com/BurningPho3nix/Setup-Tool-for-Fedora)
+- star the [project](https://github.com/Setup-Tooling/Setup-Tool-for-Fedora)
 - State your support for [our project](https://github.com/BurningPho3nix/Setup-Tool-for-Fedora) on Mastodon
 
 
@@ -65,7 +65,7 @@ Try to follow these guidelines:
 
 ### Creating an issue
 
-Check out [Template-Folder](https://github.com/BurningPho3nix/Setup-Tool-for-Fedora/tree/stable/.github/ISSUE_TEMPLATE)
+Check out [Template-Folder](https://github.com/Setup-Tooling/Setup-Tool-for-Fedora/tree/stable/.github/ISSUE_TEMPLATE)
 
 
 ### Closing issues
