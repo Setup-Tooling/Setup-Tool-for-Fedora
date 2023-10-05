@@ -76,4 +76,4 @@ FURTHERMORE THIS PROJECT HAS NO RELATION TO RED HAT, RED HAT CZECH, RED HAT INDI
 
 If you have any problems with software from "The Fedora Project", "RPM-Fusion", "Flathub", any "Red Hat" Company or IBM,
 please report the issue to them.
-If you have issues with thia program report those to me through the "Issues" category on Github.
+If you have issues with this program report those to me through the "Issues" category on Github.
