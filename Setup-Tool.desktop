@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Setup-Tool
+Name=Setup Tool
 Comment=A simple setup program.
 Exec=setup-tool
 Icon=setup-tool-512
