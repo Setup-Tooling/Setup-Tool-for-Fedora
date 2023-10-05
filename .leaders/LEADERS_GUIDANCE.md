@@ -38,7 +38,7 @@
 ## Meetings
 * THE COUNCIL has a meeting once every week, on a day that agreed upon in the last meeting
 * THE COUNCIL treats every decision agreed upon as public knowledge
-* Every member of THE COUNCIL prepares for every meeting, by looking at [Issues](https://github.com/BurningPho3nix/Setup-Tool-for-Fedora/issues) and [Pull requests](https://github.com/BurningPho3nix/Setup-Tool-for-Fedora/pulls) at least an hour before the meeting begins.
+* Every member of THE COUNCIL prepares for every meeting, by looking at [Issues](https://github.com/Setup-Tooling/Setup-Tool-for-Fedora/issues) and [Pull requests](https://github.com/Setup-Tooling/Setup-Tool-for-Fedora/pulls) at least an hour before the meeting begins.
 * Optional topics:
   - Council members going on vacation
   - Council members leaving
