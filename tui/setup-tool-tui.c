@@ -3,10 +3,10 @@
 
 int main() {
     // Make setup.sh executable
-    system("chmod +x setup.sh");
+    //system("chmod +x /usr/bin/setup.sh");
 
     // Execute setup.sh
-    system("./setup.sh");
+    system("/usr/bin/setup.sh");
 
     return 0;
 }

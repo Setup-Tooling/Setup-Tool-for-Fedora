@@ -826,7 +826,7 @@ while "$packageOptionLoop"; do
     7)
       {
         echo 0
-        sudo dnf update -y
+        sudo dnf update --refresh -y
         echo 33
         flatpak update -y
         echo 67
@@ -844,8 +844,26 @@ while "$packageOptionLoop"; do
             sudo dnf --refresh upgrade
             sudo dnf -y system-upgrade download --releasever=39
             sudo dnf -y system-upgrade reboot
+        else if [[ "$fedora_version" == "39" ]]; then
+        whiptail --yesno "You are already on the latest version. Do you want to look for updates instead?" 10 50
+
+        wantUpdate=$?
+
+        if [ "$wantUpdate" -eq 0 ]; then
+         {
+         echo 0
+         sudo dnf update --refresh -y
+         echo 33
+         flatpak update -y
+         echo 67
+         snap refresh
+         echo 100
+         sleep 1
+         } | whiptail --gauge "Updating System" 6 60 0
+         fi
         else
             break
+        fi
         fi
         fi
         ;;
