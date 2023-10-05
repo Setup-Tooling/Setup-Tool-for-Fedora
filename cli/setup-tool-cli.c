@@ -706,7 +706,34 @@ int main() {
                     runCommand("sudo dnf --refresh upgrade");
                     runCommand("sudo dnf -y system-upgrade download --releasever=39");
                     runCommand("sudo dnf -y system-upgrade reboot");
+                } else if (strcmp(version, "39") == 0){
+                    printf("You are already on the latest version, do want to look for updates instead? (Y/n)\n");
+                    printf("Option: ");
+
+                    getchar();
+
+                    char wantUpdate;
+                    scanf("%c", &wantUpdate);
+
+                    if (wantUpdate == 'y' || wantUpdate == 'Y' || wantUpdate == '\n') {
+                        if (dnfInstalled || flatpakInstalled || snapInstalled) {
+                        char updateCommand[512] = "sudo ";
+                        if (dnfInstalled)
+                            strcat(updateCommand, "dnf update --refresh -y ");
+                        if (flatpakInstalled)
+                            strcat(updateCommand, "&& flatpak update -y ");
+                        if (snapInstalled)
+                            strcat(updateCommand, "&& snap refresh");
+
+                        runCommand(updateCommand);
+                       }
+                    } else {
+                        printf("No updates will be checked.\n");
+                    }
                 } else {
+                    printf("This program can't find any Version upgrades for you,\n");
+                    printf("you can still try:\n");
+                    printf("sudo dnf --refresh upgrade && sudo dnf -y system-upgrade download --releasever=39\n");
                     break;
                 }
                 break;
