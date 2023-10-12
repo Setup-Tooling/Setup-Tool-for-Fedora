@@ -25,6 +25,9 @@ To-Do-list:
 - [x] implementing quit/exit option
 - [x] bug fixing (if needed)
 
+1.4.100c:
+- [x] adding Shell script TUI version
+
 1.5.0c:
 - [ ] adding TUI version
 
