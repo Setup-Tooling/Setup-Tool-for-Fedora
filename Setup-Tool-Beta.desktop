@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Setup Tool Beta
+Comment=A simple setup program.
+Exec=setup-tool-beta
+Icon=setup-tool-512
+Terminal=true
+Type=Application
+Categories=Administration;System;Utility;
