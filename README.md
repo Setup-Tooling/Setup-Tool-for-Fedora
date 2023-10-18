@@ -82,9 +82,9 @@ sudo dnf install setup-tool-lts -y
 _______________________________________________________
 DISCLAIMER
 
-THIS PROJECT HAS NO RELATION TO THE FEDORA PROJECT NOR THE RPM FUSION PROJECT NOR TO FLATHUB.
-FURTHERMORE THIS PROJECT HAS NO RELATION TO RED HAT, RED HAT CZECH, RED HAT INDIA AND IBM.
+THIS PROJECT HAS NO RELATION TO THE FEDORA PROJECT NOR THE RPM FUSION PROJECT NOR TO FLATHUB NOR TO SNAPCRAFT.
+FURTHERMORE THIS PROJECT HAS NO RELATION TO CANONICAL LTD., RED HAT, RED HAT CZECH, RED HAT INDIA AND IBM.
 
-If you have any problems with software from "The Fedora Project", "RPM-Fusion", "Flathub", any "Red Hat" Company or IBM,
+If you have any problems with software from "The Fedora Project", "RPM-Fusion", "Flathub", Canonical Ltd., "Snapcraft", any "Red Hat" Company or IBM,
 please report the issue to them.
 If you have issues with this program report those to us through the "Issues" category on Github.
