@@ -18,10 +18,10 @@ To-Do-list:
 - [x] implementing quit/exit option
 - [x] bug fixing (if needed)
 
-1.4.100c: RELEASED (LTS)
+1.4.101c: RELEASED (LTS)
 - [x] adding Shell script TUI version
 
-1.5.0c:
+1.5.0c (currently in Beta):
 - [ ] adding TUI version
 
 2.0.0c:
