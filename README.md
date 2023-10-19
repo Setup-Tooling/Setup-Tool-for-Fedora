@@ -40,8 +40,8 @@ ______________________________________________________
 Codec Setup options:
 - additional general multimedia codecs
 - libdvdcss/DVD compatibility
-- AMD freeworld driver
-- Nvidia vaapi driver
+- AMD freeworld drivers
+- libva Nvidia driver
 - Intel media driver
 
 _______________________________________________________
