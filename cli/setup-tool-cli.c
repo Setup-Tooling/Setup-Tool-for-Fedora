@@ -498,7 +498,7 @@ int main() {
                             runCommand("flatpak install net.davidotek.pupgui2 -y");
                             runCommand("flatpak install net.lutris.Lutris -y");
                             runCommand("sudo dnf install -y steam");
-                            runCommand("sudo dnf install -y nvidia-vaapi-driver");
+                            runCommand("sudo dnf install -y libva-nvidia-driver");
                             break;
                         case 3:
                             runCommand("sudo dnf config-manager --setopt=\"defaultyes=True\" --setopt=\"max_parallel_downloads=10\" --save");
@@ -576,7 +576,7 @@ int main() {
                             runCommand("flatpak install net.davidotek.pupgui2 -y");
                             runCommand("flatpak install net.lutris.Lutris -y");
                             runCommand("sudo dnf install -y steam");
-                            runCommand("sudo dnf install -y nvidia-vaapi-driver");
+                            runCommand("sudo dnf install -y libva-nvidia-driver");
                             runCommand("flatpak install com.obsproject.Studio -y");
                             runCommand("sudo dnf install -y kdenlive krita");
                             runCommand("flatpak install org.gimp.GIMP -y");
