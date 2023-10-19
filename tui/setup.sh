@@ -297,7 +297,7 @@ case $OPTION in
             4)
             {
             echo 0
-               sudo dnf install -y nvidia-vaapi-driver
+               sudo dnf install -y libva-nvidia-driver
             echo 100
             sleep 1
                 } | whiptail --gauge "Installing Driver" 6 60 0
@@ -525,7 +525,7 @@ while "$packageOptionLoop"; do
             echo 88
                 sudo dnf install -y steam
             echo 94
-                sudo dnf install -y nidia-vaapi-driver
+                sudo dnf install -y libva-nidia-driver
             echo 100
             sleep 1
                 } | whiptail --gauge "Running Script" 6 60 0
@@ -665,7 +665,7 @@ while "$packageOptionLoop"; do
             echo 47
                 sudo dnf groupupdate -y sound-and-video
             echo 53
-                sudo dnf install -y nvidia-vaapi-driver
+                sudo dnf install -y libva-nvidia-driver
             echo 58
                 sudo dnf install -y kdenlive krita
             echo 63
