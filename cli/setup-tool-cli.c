@@ -312,7 +312,11 @@ int main() {
                             runCommand("sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686");
                             break;
                         case 4:
+                            if (strcmp(version, "39") == 0) {
+                            runCommand("sudo dnf install -y libva-nvidia-driver");
+                        } else {
                             runCommand("sudo dnf install -y nvidia-vaapi-driver");
+                        }
                             break;
                         case 5:
                             runCommand("sudo dnf install -y intel-media-driver");
@@ -398,18 +402,14 @@ int main() {
 
                         printf("Package Name: %s\n", packageName);
 
-                        if (flatpakInstalled) {
-                            sprintf(command, "flatpak search %s", packageName);
-                            printf("Executing command: %s\n", command);
-                            system(command);
-                        } if (dnfInstalled) {
-                            sprintf(command, "sudo dnf search %s", packageName);
-                            printf("Executing command: %s\n", command);
-                            system(command);
-                        } if (snapInstalled) {
-                            sprintf(command, "sudo snap search %s", packageName);
-                            printf("Executing command: %s\n", command);
-                            system(command);
+                        if (dnfInstalled || flatpakInstalled || snapInstalled) {
+
+                        if (dnfInstalled)
+                            runCommand("sudo dnf search --refresh %s");
+                        if (flatpakInstalled)
+                            runCommand("flatpak search %s");
+                        if (snapInstalled)
+                            runCommand("snap find %s");
                         } else {
                             printf("No package manager found. Please install either Flatpak, DNF, or Snap.\n");
                         }
@@ -471,7 +471,7 @@ int main() {
                             runCommand("sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686");
                             runCommand("sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686");
                             runCommand("flatpak install com.discordapp.Discord -y");
-                            runCommand("flatpak com.usebottles.bottles -y");
+                            runCommand("flatpak install com.usebottles.bottles -y");
                             runCommand("flatpak install net.davidotek.pupgui2 -y");
                             runCommand("flatpak install net.lutris.Lutris -y");
                             runCommand("sudo dnf install -y steam");
@@ -494,11 +494,15 @@ int main() {
                             runCommand("sudo dnf groupupdate -y multimedia --setop=\"install_weak_deps=False\" --exclude=PackageKit-gstreamer-plugin");
                             runCommand("sudo dnf groupupdate -y sound-and-video");
                             runCommand("flatpak install com.discordapp.Discord -y");
-                            runCommand("flatpak com.usebottles.bottles -y");
+                            runCommand("flatpak install com.usebottles.bottles -y");
                             runCommand("flatpak install net.davidotek.pupgui2 -y");
                             runCommand("flatpak install net.lutris.Lutris -y");
                             runCommand("sudo dnf install -y steam");
+                            if (strcmp(version, "39") == 0) {
                             runCommand("sudo dnf install -y libva-nvidia-driver");
+                        } else {
+                            runCommand("sudo dnf install -y nvidia-vaapi-driver");
+                        }
                             break;
                         case 3:
                             runCommand("sudo dnf config-manager --setopt=\"defaultyes=True\" --setopt=\"max_parallel_downloads=10\" --save");
@@ -518,7 +522,7 @@ int main() {
                             runCommand("sudo dnf groupupdate -y multimedia --setop=\"install_weak_deps=False\" --exclude=PackageKit-gstreamer-plugin");
                             runCommand("sudo dnf groupupdate -y sound-and-video");
                             runCommand("flatpak install com.discordapp.Discord -y");
-                            runCommand("flatpak com.usebottles.bottles -y");
+                            runCommand("flatpak install com.usebottles.bottles -y");
                             runCommand("flatpak install net.davidotek.pupgui2 -y");
                             runCommand("flatpak install net.lutris.Lutris -y");
                             runCommand("sudo dnf install -y steam");
@@ -546,7 +550,7 @@ int main() {
                             runCommand("sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686");
                             runCommand("sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686");
                             runCommand("flatpak install com.discordapp.Discord -y");
-                            runCommand("flatpak com.usebottles.bottles -y");
+                            runCommand("flatpak install com.usebottles.bottles -y");
                             runCommand("flatpak install net.davidotek.pupgui2 -y");
                             runCommand("flatpak install net.lutris.Lutris -y");
                             runCommand("sudo dnf install -y steam");
@@ -572,11 +576,15 @@ int main() {
                             runCommand("sudo dnf groupupdate -y multimedia --setop=\"install_weak_deps=False\" --exclude=PackageKit-gstreamer-plugin");
                             runCommand("sudo dnf groupupdate -y sound-and-video");
                             runCommand("flatpak install com.discordapp.Discord -y");
-                            runCommand("flatpak com.usebottles.bottles -y");
+                            runCommand("flatpak install com.usebottles.bottles -y");
                             runCommand("flatpak install net.davidotek.pupgui2 -y");
                             runCommand("flatpak install net.lutris.Lutris -y");
                             runCommand("sudo dnf install -y steam");
+                            if (strcmp(version, "39") == 0) {
                             runCommand("sudo dnf install -y libva-nvidia-driver");
+                        } else {
+                            runCommand("sudo dnf install -y nvidia-vaapi-driver");
+                        }
                             runCommand("flatpak install com.obsproject.Studio -y");
                             runCommand("sudo dnf install -y kdenlive krita");
                             runCommand("flatpak install org.gimp.GIMP -y");
@@ -599,7 +607,7 @@ int main() {
                             runCommand("sudo dnf groupupdate -y multimedia --setop=\"install_weak_deps=False\" --exclude=PackageKit-gstreamer-plugin");
                             runCommand("sudo dnf groupupdate -y sound-and-video");
                             runCommand("flatpak install com.discordapp.Discord -y");
-                            runCommand("flatpak com.usebottles.bottles -y");
+                            runCommand("flatpak install com.usebottles.bottles -y");
                             runCommand("flatpak install net.davidotek.pupgui2 -y");
                             runCommand("flatpak install net.lutris.Lutris -y");
                             runCommand("sudo dnf install -y steam");
