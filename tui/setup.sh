@@ -297,7 +297,11 @@ case $OPTION in
             4)
             {
             echo 0
-               sudo dnf install -y libva-nvidia-driver
+            if [[ "$fedora_version" == "39" ]]; then
+                sudo dnf install -y libva-nvidia-driver
+            else
+                sudo dnf install -y nvidia-vaapi-driver
+            fi
             echo 100
             sleep 1
                 } | whiptail --gauge "Installing Driver" 6 60 0
@@ -473,7 +477,7 @@ while "$packageOptionLoop"; do
             echo 74
                 flatpak install com.discordapp.Discord -y
             echo 79
-                flatpak com.usebottles.bottles -y
+                flatpak install com.usebottles.bottles -y
             echo 84
                 flatpak install net.davidotek.pupgui2 -y
             echo 89
@@ -517,7 +521,7 @@ while "$packageOptionLoop"; do
             echo 63
                 flatpak install com.discordapp.Discord -y
             echo 69
-                flatpak com.usebottles.bottles -y
+                flatpak install com.usebottles.bottles -y
             echo 75
                 flatpak install net.davidotek.pupgui2 -y
             echo 81
@@ -525,7 +529,11 @@ while "$packageOptionLoop"; do
             echo 88
                 sudo dnf install -y steam
             echo 94
-                sudo dnf install -y libva-nidia-driver
+                if [[ "$fedora_version" == "39" ]]; then
+                sudo dnf install -y libva-nvidia-driver
+                else
+                sudo dnf install -y nvidia-vaapi-driver
+                fi
             echo 100
             sleep 1
                 } | whiptail --gauge "Running Script" 6 60 0
@@ -563,7 +571,7 @@ while "$packageOptionLoop"; do
             echo 63
                 flatpak install com.discordapp.Discord -y
             echo 69
-                flatpak com.usebottles.bottles -y
+                flatpak install com.usebottles.bottles -y
             echo 75
                 flatpak install net.davidotek.pupgui2 -y
             echo 81
@@ -617,7 +625,7 @@ while "$packageOptionLoop"; do
             echo 64
                 flatpak install com.discordapp.Discord -y
             echo 68
-                flatpak com.usebottles.bottles -y
+                flatpak install com.usebottles.bottles -y
             echo 73
                 flatpak install net.davidotek.pupgui2 -y
             echo 77
@@ -665,7 +673,11 @@ while "$packageOptionLoop"; do
             echo 47
                 sudo dnf groupupdate -y sound-and-video
             echo 53
+                if [[ "$fedora_version" == "39" ]]; then
                 sudo dnf install -y libva-nvidia-driver
+                else
+                sudo dnf install -y nvidia-vaapi-driver
+                fi
             echo 58
                 sudo dnf install -y kdenlive krita
             echo 63
@@ -675,7 +687,7 @@ while "$packageOptionLoop"; do
             echo 74
                 flatpak install com.discordapp.Discord -y
             echo 79
-                flatpak com.usebottles.bottles -y
+                flatpak install com.usebottles.bottles -y
             echo 84
                 flatpak install net.davidotek.pupgui2 -y
             echo 89
@@ -727,7 +739,7 @@ while "$packageOptionLoop"; do
             echo 74
                 flatpak install com.discordapp.Discord -y
             echo 79
-                flatpak com.usebottles.bottles -y
+                flatpak install com.usebottles.bottles -y
             echo 84
                 flatpak install net.davidotek.pupgui2 -y
             echo 89
