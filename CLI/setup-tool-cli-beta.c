@@ -5,6 +5,7 @@
 #include <termios.h>
 #include <stdbool.h>
 #include <stdarg.h>
+#include <fcntl.h>
 
 char *getSecurePassword() {
     struct termios oldTerm, newTerm;
@@ -48,13 +49,10 @@ void runCommand(const char* format, ...) {
     }
 
     char buffer[512];
-    FILE* logFile = fopen("/tmp/setup-tool.log", "a"); // Open the log file in append mode
     while (fgets(buffer, sizeof(buffer), pipe) != NULL) {
         printf("%s", buffer);
-        fprintf(logFile, "%s", buffer); // Write the output to the log file
     }
 
-    fclose(logFile);
     pclose(pipe);
 }
 
@@ -100,15 +98,7 @@ void extractFedoraVersion(char *version) {
 }
 
 int main() {
-    bool flatpakInstalled = commandExists("flatpak --version");
-    bool snapInstalled = commandExists("snap --version");
-    bool dnfInstalled = commandExists("dnf --version");
-    bool neofetchInstalled = commandExists("neofetch --version");
 
-    if (!flatpakInstalled && !snapInstalled && !dnfInstalled) {
-    printf("Flatpak, Snap, and DNF package managers are not installed on this system.\n");
-    printf("Please install at least one of them to use the Package Management Helper.\n");
-              }
     int option;
 
     char* password = getSecurePassword();
@@ -124,8 +114,51 @@ int main() {
 
     sprintf(sudoCommand, "echo '%s' | sudo -S echo 'This program is executed with sudo'", password);
     runCommand(sudoCommand);
+
+
+
     printf("Fedora version: %s\n", version);
 
+    bool flatpakInstalled = commandExists("flatpak --version");
+    bool snapInstalled = commandExists("snap --version");
+    bool dnfInstalled = commandExists("dnf --version");
+    bool neofetchInstalled = commandExists("neofetch --version");
+
+    int gpuCheck = system("lspci | grep -i nvidia");
+    int driverCheck = system("lsmod | grep nvidia");
+
+    if (!flatpakInstalled && !snapInstalled && !dnfInstalled) {
+    printf("Flatpak, Snap, and DNF package managers are not installed on this system.\n");
+    printf("Please install at least one of them to use the Package Management Helper.\n");
+    }
+
+    if (driverCheck != 0) {
+
+            if (gpuCheck ==0) {
+
+               char response;
+            printf("NVIDIA drivers are not installed. Do you want to install them? (y/n): ");
+            scanf(" %c", &response);
+            if (response == 'y' || response == 'Y') {
+                printf("Installing NVIDIA drivers...\n");
+                if (strcmp(version, "39") == 0) {
+                    runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm");
+                    runCommand("sudo dnf groupupdate -y core");
+                } else {
+                    runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm");
+                    runCommand("sudo dnf groupupdate -y core");
+                }
+                runCommand("sudo dnf install akmod-nvidia nvidia-settings nvidia-modprobe nvtop nv-codec-headers -y");
+            } else {
+                printf("NVIDIA drivers will not be installed.\n");
+            }
+            } else if (gpuCheck ==0 && driverCheck ==0){
+            printf("NVIDIA drivers are installed.\n");
+            }
+
+            } else if (gpuCheck !=0) {
+            return 0;
+    }
         while (1) {
         printf("\n");
         printf("Choose an option:\n");
@@ -313,7 +346,11 @@ int main() {
                             runCommand("sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686");
                             break;
                         case 4:
+                            if (strcmp(version, "39") == 0) {
+                            runCommand("sudo dnf install -y libva-nvidia-driver");
+                        } else {
                             runCommand("sudo dnf install -y nvidia-vaapi-driver");
+                        }
                             break;
                         case 5:
                             runCommand("sudo dnf install -y intel-media-driver");
@@ -468,7 +505,7 @@ int main() {
                             runCommand("sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686");
                             runCommand("sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686");
                             runCommand("flatpak install com.discordapp.Discord -y");
-                            runCommand("flatpak com.usebottles.bottles -y");
+                            runCommand("flatpak install com.usebottles.bottles -y");
                             runCommand("flatpak install net.davidotek.pupgui2 -y");
                             runCommand("flatpak install net.lutris.Lutris -y");
                             runCommand("sudo dnf install -y steam");
@@ -491,11 +528,15 @@ int main() {
                             runCommand("sudo dnf groupupdate -y multimedia --setop=\"install_weak_deps=False\" --exclude=PackageKit-gstreamer-plugin");
                             runCommand("sudo dnf groupupdate -y sound-and-video");
                             runCommand("flatpak install com.discordapp.Discord -y");
-                            runCommand("flatpak com.usebottles.bottles -y");
+                            runCommand("flatpak install com.usebottles.bottles -y");
                             runCommand("flatpak install net.davidotek.pupgui2 -y");
                             runCommand("flatpak install net.lutris.Lutris -y");
                             runCommand("sudo dnf install -y steam");
+                            if (strcmp(version, "39") == 0) {
+                            runCommand("sudo dnf install -y libva-nvidia-driver");
+                        } else {
                             runCommand("sudo dnf install -y nvidia-vaapi-driver");
+                        }
                             break;
                         case 3:
                             runCommand("sudo dnf config-manager --setopt=\"defaultyes=True\" --setopt=\"max_parallel_downloads=10\" --save");
@@ -515,7 +556,7 @@ int main() {
                             runCommand("sudo dnf groupupdate -y multimedia --setop=\"install_weak_deps=False\" --exclude=PackageKit-gstreamer-plugin");
                             runCommand("sudo dnf groupupdate -y sound-and-video");
                             runCommand("flatpak install com.discordapp.Discord -y");
-                            runCommand("flatpak com.usebottles.bottles -y");
+                            runCommand("flatpak install com.usebottles.bottles -y");
                             runCommand("flatpak install net.davidotek.pupgui2 -y");
                             runCommand("flatpak install net.lutris.Lutris -y");
                             runCommand("sudo dnf install -y steam");
@@ -543,7 +584,7 @@ int main() {
                             runCommand("sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686");
                             runCommand("sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686");
                             runCommand("flatpak install com.discordapp.Discord -y");
-                            runCommand("flatpak com.usebottles.bottles -y");
+                            runCommand("flatpak install com.usebottles.bottles -y");
                             runCommand("flatpak install net.davidotek.pupgui2 -y");
                             runCommand("flatpak install net.lutris.Lutris -y");
                             runCommand("sudo dnf install -y steam");
@@ -569,11 +610,15 @@ int main() {
                             runCommand("sudo dnf groupupdate -y multimedia --setop=\"install_weak_deps=False\" --exclude=PackageKit-gstreamer-plugin");
                             runCommand("sudo dnf groupupdate -y sound-and-video");
                             runCommand("flatpak install com.discordapp.Discord -y");
-                            runCommand("flatpak com.usebottles.bottles -y");
+                            runCommand("flatpak install com.usebottles.bottles -y");
                             runCommand("flatpak install net.davidotek.pupgui2 -y");
                             runCommand("flatpak install net.lutris.Lutris -y");
                             runCommand("sudo dnf install -y steam");
+                            if (strcmp(version, "39") == 0) {
+                            runCommand("sudo dnf install -y libva-nvidia-driver");
+                        } else {
                             runCommand("sudo dnf install -y nvidia-vaapi-driver");
+                        }
                             runCommand("flatpak install com.obsproject.Studio -y");
                             runCommand("sudo dnf install -y kdenlive krita");
                             runCommand("flatpak install org.gimp.GIMP -y");
@@ -596,7 +641,7 @@ int main() {
                             runCommand("sudo dnf groupupdate -y multimedia --setop=\"install_weak_deps=False\" --exclude=PackageKit-gstreamer-plugin");
                             runCommand("sudo dnf groupupdate -y sound-and-video");
                             runCommand("flatpak install com.discordapp.Discord -y");
-                            runCommand("flatpak com.usebottles.bottles -y");
+                            runCommand("flatpak install com.usebottles.bottles -y");
                             runCommand("flatpak install net.davidotek.pupgui2 -y");
                             runCommand("flatpak install net.lutris.Lutris -y");
                             runCommand("sudo dnf install -y steam");
@@ -680,26 +725,29 @@ int main() {
             }
             case 7:{
                 if (dnfInstalled || flatpakInstalled || snapInstalled) {
-                    char updateCommand[512] = "sudo ";
+                    //char updateCommand[512] = "sudo ";
                     if (dnfInstalled)
-                        strcat(updateCommand, "dnf update --refresh -y ");
+                        runCommand("sudo dnf -y update --refresh");
+                       // strcat(updateCommand, "dnf update --refresh -y ");
                     if (flatpakInstalled)
-                        strcat(updateCommand, "&& flatpak update -y ");
+                        runCommand("flatpak update -y");
+                     //   strcat(updateCommand, "&& flatpak update -y ");
                     if (snapInstalled)
-                        strcat(updateCommand, "&& snap refresh");
+                        runCommand("snap refresh");
+                     //   strcat(updateCommand, "&& snap refresh");
 
-                    runCommand(updateCommand);
+                  //  runCommand(updateCommand);
                 } else {
                     printf("DNF, Flatpak, and Snap are not installed.\n");
                 }
                 break;
             }
             case 8:
-                 if (strcmp(version, "38") == 0) {
+                 if (strcmp(version, "37") == 0) {
                     runCommand("sudo dnf --refresh upgrade");
                     runCommand("sudo dnf -y system-upgrade download --releasever=39");
                     runCommand("sudo dnf -y system-upgrade reboot");
-                } else if (strcmp(version, "37") == 0) {
+                } else if (strcmp(version, "38") == 0) {
                     runCommand("sudo dnf --refresh upgrade");
                     runCommand("sudo dnf -y system-upgrade download --releasever=39");
                     runCommand("sudo dnf -y system-upgrade reboot");
@@ -714,15 +762,18 @@ int main() {
 
                     if (wantUpdate == 'y' || wantUpdate == 'Y' || wantUpdate == '\n') {
                         if (dnfInstalled || flatpakInstalled || snapInstalled) {
-                        char updateCommand[512] = "sudo ";
+                       // char updateCommand[512] = "sudo ";
                         if (dnfInstalled)
-                            strcat(updateCommand, "dnf update --refresh -y ");
+                            runCommand("sudo dnf -y update --refresh");
+                           // strcat(updateCommand, "dnf update --refresh -y ");
                         if (flatpakInstalled)
-                            strcat(updateCommand, "&& flatpak update -y ");
+                            runCommand("flatpak update -y");
+                          //  strcat(updateCommand, "&& flatpak update -y ");
                         if (snapInstalled)
-                            strcat(updateCommand, "&& snap refresh");
+                            runCommand("snap refresh");
+                         //   strcat(updateCommand, "&& snap refresh");
 
-                        runCommand(updateCommand);
+                      //  runCommand(updateCommand);
                        }
                     } else {
                         printf("No updates will be checked.\n");
@@ -746,5 +797,8 @@ int main() {
             }
         }
     if (option == 10)
+
+
+
     return 0;
 }
