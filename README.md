@@ -7,6 +7,20 @@ Please read the README.md on older versions, if you use those, due to difference
 
 ______________________________________________________
 
+supported Fedora versions
+- [ ] 37
+- [ ] 38
+- [ ] 39
+
+______________________________________________________
+
+supported versions
+- [ ] 1.4.101c    (LTS)
+- [ ] 1.4.103c    (Stable)
+- [ ] 1.5.0c      (Beta)
+
+______________________________________________________
+
 start page options:
 - repo setup
 - DNF modification
