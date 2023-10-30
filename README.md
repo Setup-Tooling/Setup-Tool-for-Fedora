@@ -8,9 +8,9 @@ Please read the README.md on older versions, if you use those, due to difference
 ______________________________________________________
 
 supported Fedora versions
-- [ ] 37
-- [ ] 38
-- [ ] 39
+- [ ] 37        (legacy)
+- [ ] 38        (current)
+- [ ] 39        (current)
 
 ______________________________________________________
 
