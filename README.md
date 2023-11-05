@@ -23,7 +23,8 @@ To-Do-list:
 - [x] adding Shell script TUI version
 
 1.5.0c (currently in Beta):
-- [ ] adding TUI version
+- [ ] bug fixing
+- [ ] new features
 
 2.0.0c:
 - [ ] adding GUI version
