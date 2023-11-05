@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <stddef.h>
 
@@ -32,6 +33,25 @@ int main() {
     if (numInstalledPrograms == 0) {
         printf("No installed programs found.\n");
         return 0;
+    }
+
+    // Ask the user for confirmation
+    char confirm[2];
+    int validInput = 0;
+
+    while (!validInput) {
+        printf("This program might pull software from third party repositories,\n");
+        printf("if you enable these repositories through this program or through other means.\n");
+        printf("Do you accept this? (Y/n): ");
+        fgets(confirm, sizeof(confirm), stdin);
+        if (confirm[0] == 'Y' || confirm[0] == 'y' || confirm[0] == '\n') {
+            validInput = 1;
+        } else if (confirm[0] == 'N' || confirm[0] == 'n') {
+            printf("Exiting the program.\n");
+            return 0;
+        } else {
+            printf("Invalid input. Please enter Y/y or Enter to confirm or N/n to exit.\n");
+        }
     }
 
     if (numInstalledPrograms == 1) {
