@@ -139,7 +139,7 @@ int main() {
                char response;
             printf("NVIDIA drivers are not installed. Do you want to install them? (y/n): ");
             scanf(" %c", &response);
-            if (response == 'y' || response == 'Y') {
+            if (response == 'y' || response == 'Y' || response == '\n') {
                 printf("Installing NVIDIA drivers...\n");
                 if (strcmp(version, "39") == 0) {
                     runCommand("sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm");
@@ -189,9 +189,10 @@ int main() {
                     printf("6. Install All\n");
                     printf("7. Install and enable snapd\n");
                     printf("8. Install All + snapd\n");
-                    printf("9. Back to main menu\n");
+                    printf("9. Bring your own Copr\n");
+                    printf("10. Back to main menu\n");
                     printf("Option: ");
-                    repoOption = getMenuOption(9);
+                    repoOption = getMenuOption(10);
 
                     switch (repoOption) {
                         case 1:
@@ -256,6 +257,12 @@ int main() {
                             runCommand("sudo ln -s /var/lib/snapd/snap /snap");
                             break;
                         case 9:
+                            char copr [256];
+                            printf("Copr name (creator/Program): ");
+                            scanf("%s", copr);
+                            runCommand("sudo dnf copr enable %s -y", copr);
+                            break;
+                        case 10:
                             printf("Returning to main menu.\n");
                             break;
                         default:
@@ -263,7 +270,7 @@ int main() {
                             break;
                     }
 
-                    if (repoOption == 9) {
+                    if (repoOption == 10) {
                         break;
                     }
                 }
@@ -376,9 +383,9 @@ int main() {
                 while (packageOptionLoop) {
                     printf("\n");
                     printf("Choose an option for Package Management Helper:\n");
-                    printf("1. Install a package\n");
+                  /*  printf("1. Install a package\n");
                     printf("2. Remove a package\n");
-                    printf("3. Search for a package\n");
+                  */  printf("3. Search for a package\n");
                     printf("4. Back to main menu\n");
                     printf("Option: ");
                     packageOption = getMenuOption(4);
@@ -386,9 +393,9 @@ int main() {
                     switch (packageOption) {
                         case 1: {
                             printf("Enter the name of the package to install: ");
-                          scanf(" %[^\n]", packageName);
+                            scanf(" %[^\n]", packageName);
 
-                          printf("Package Name: %s\n", packageName);
+                            printf("Package Name: %s\n", packageName);
 
                            if (flatpakInstalled) {
                             sprintf(command, "flatpak install -y %s", packageName);
