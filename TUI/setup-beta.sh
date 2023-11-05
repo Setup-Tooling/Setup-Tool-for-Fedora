@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/sh
 extract_fedora_version() {
     while IFS= read -r line; do
         if [[ $line == VERSION_ID=* ]]; then
@@ -83,7 +83,8 @@ case $OPTION in
         "6" "Install All" \
         "7" "Install and enable snapd" \
         "8" "Install All + snapd" \
-        "9" "Back to main menu" \
+        "9" "Bring your own copr" \
+        "10" "Back to main menu" \
         3>&1 1>&2 2>&3)
 
         # Check which option was selected and perform the corresponding action
@@ -223,7 +224,18 @@ case $OPTION in
                 } | whiptail --gauge "Installing Repos" 6 60 0
                 ;;
             9)
-                # Perform action for Option 7 of Repo Setup
+               scopr=$(whiptail --title "Copr" --inputbox "Name of copr (owner/project)" 8 40 3>&1 1>&2 2>&3)
+                exit_status=$?
+                if [ $exit_status = 0 ]; then
+                    # Check if the input is in the "owner/project" format
+                    if [[ $scopr =~ ^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$ ]]; then
+                        sudo dnf copr enable $scopr -y
+                    else
+                        echo "Invalid input. Please provide the owner and project name in the 'owner/project' format."
+                    fi
+                fi
+                ;;
+            10)
                 break
                 ;;
             *)
