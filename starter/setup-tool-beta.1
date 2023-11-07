@@ -1,7 +1,7 @@
-.TH Setup Tool "Version Beta" "User Manual"
+.TH Setup Tool "Version: Beta" "User Manual"
 
 .SH NAME
-setup-tool \- Setup-Tool
+setup-tool-beta \- Setup Tool Beta
 
 .SH DESCRIPTION
 This program is made to make setting up different things, like codecs and repos, easier on Fedora.
@@ -16,15 +16,23 @@ Options of this program are following:
 - System upgrade
 - Reboot
 
-Please remember that this program is not part of the Fedora Project and is maintained by a third-party person.
+Please remember that this program is not part of the Fedora Project and is maintained by a third-party community.
+
+.SH OPTIONS
+.TP
+.B setup-tool-beta.conf
+current config options:
+
+tp_notice = True/False                  |   True = enables third-party notice   //  False = disables third-party notice
+                                        |   default is True, but will be changed to False if you accept the notice in the program
 
 .SH USAGE
-To use Setup-Tool, open a terminal and run the following command:
+To use Setup Tool (beta), open a terminal and run the following command:
 
-.BR setup-tool
+.BR setup-tool-beta
 
 .SH NOTES
-This project is maintained by a third-party developer and not part of the Fedora Project.
+This project is maintained by a third-party community and not part of the Fedora Project.
 
 .SH AUTHOR
 Setup Tooling Project <pr_st@burningpho3nix.xyz>
