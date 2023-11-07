@@ -17,7 +17,7 @@ ______________________________________________________
 supported versions
 - [ ] 1.4.101c    (LTS)
 - [ ] 1.4.103c    (Stable)
-- [ ] 1.5.0c      (Beta)
+- [ ] 1.5.0c      (Beta/rc1)
 
 ______________________________________________________
 
@@ -42,6 +42,7 @@ Repo Setup gives you the options to install:
 - all of the above
 - snapd
 - everything above including snapd
+- bring your own COPR (1.5.0c_rc1)
 
 ______________________________________________________
 
