@@ -56,7 +56,7 @@ extract_fedora_version() {
         fi
 # Use whiptail to display a menu with five options
 while true; do
-OPTION=$(whiptail --title "Menu" --menu "Choose an option" 15 60 5 \
+OPTION=$(whiptail --title "Menu" --menu "Choose an option" 20 60 8 \
 "1" "Repo Setup" \
 "2" "DNF Modification Tool" \
 "3" "Codec Setup" \
@@ -224,7 +224,7 @@ case $OPTION in
                 } | whiptail --gauge "Installing Repos" 6 60 0
                 ;;
             9)
-               scopr=$(whiptail --title "Copr" --inputbox "Name of copr (owner/project)" 8 40 3>&1 1>&2 2>&3)
+               scopr=$(whiptail --title "Copr" --inputbox "Name of copr (owner/project)" 8 60 3>&1 1>&2 2>&3)
                 exit_status=$?
                 if [ $exit_status = 0 ]; then
                     # Check if the input is in the "owner/project" format
@@ -240,7 +240,7 @@ case $OPTION in
                 ;;
             *)
                 # Display an error message if an invalid option is selected
-                whiptail --msgbox "Invalid option selected" 8 40
+                whiptail --msgbox "Invalid option selected" 8 60
                 ;;
         esac
     done
@@ -248,7 +248,7 @@ case $OPTION in
     2)
        # Use whiptail to display a menu with five options
             while true; do
-                DNF_OPTION=$(whiptail --title "DNF Modification Tool" --menu "Choose an option" 15 60 5 \
+                DNF_OPTION=$(whiptail --title "DNF Modification Tool" --menu "Choose an option" 20 60 8 \
                 "1" "Set defaultyes=True" \
                 "2" "Set max_parallel_downloads=10" \
                 "3" "Set all recommended options" \
@@ -272,10 +272,10 @@ case $OPTION in
                 ;;
             4)
                 # Perform action for Option 4 of DNF modification tool
-                soption=$(whiptail --title "Option" --inputbox "Enter an option" 8 40 3>&1 1>&2 2>&3)
+                soption=$(whiptail --title "Option" --inputbox "Enter an option" 8 60 3>&1 1>&2 2>&3)
                 exit_status=$?
                 if [ $exit_status = 0 ]; then
-                    value=$(whiptail --title "Value" --inputbox "Enter a value for option $option" 8 40 3>&1 1>&2 2>&3)
+                    value=$(whiptail --title "Value" --inputbox "Enter a value for option $option" 8 60 3>&1 1>&2 2>&3)
                     exit_status=$?
                     if [ $exit_status = 0 ]; then
                     sudo dnf config-manager --setopt="$option=$value" --save
@@ -288,7 +288,7 @@ case $OPTION in
                 ;;
             *)
                 # Display an error message if an invalid option is selected
-                whiptail --msgbox "Invalid option selected" 8 40
+                whiptail --msgbox "Invalid option selected" 8 60
                 ;;
         esac
     done
@@ -366,7 +366,7 @@ case $OPTION in
                 ;;
             *)
                 # Display an error message if an invalid option is selected
-                whiptail --msgbox "Invalid option selected" 8 40
+                whiptail --msgbox "Invalid option selected" 8 60
                 ;;
         esac
     done
@@ -378,7 +378,7 @@ command_exists() {
 
 # Function to display the main menu using Whiptail
 show_main_menu() {
-    whiptail --title "Package Management Helper" --menu "Choose an option:" 15 50 4 \
+    whiptail --title "Package Management Helper" --menu "Choose an option:" 20 60 8 \
         1 "Install a package" \
         2 "Remove a package" \
         3 "Search for a package" \
@@ -393,69 +393,78 @@ while "$packageOptionLoop"; do
 
     case $choice in
         1)
-            packageName=$(whiptail --inputbox "Enter the name of the package to install:" 8 50 --title "Install a Package" 3>&1 1>&2 2>&3)
+            packageName=$(whiptail --inputbox "Enter the name of the package to install:" 8 60 --title "Install a Package" 3>&1 1>&2 2>&3)
             if [[ -n $packageName ]]; then
                 if command_exists "flatpak"; then
                     command="flatpak install -y $packageName"
-                    whiptail --msgbox "Executing command: $command" 10 50
+                    whiptail --msgbox "Executing command: $command" 8 60
                     $command
                 elif command_exists "dnf"; then
                     command="sudo dnf install -y $packageName"
-                    whiptail --msgbox "Executing command: $command" 10 50
+                    whiptail --msgbox "Executing command: $command" 8 60
                     $command
                 elif command_exists "snap"; then
                     command="sudo snap install $packageName"
-                    whiptail --msgbox "Executing command: $command" 10 50
+                    whiptail --msgbox "Executing command: $command" 8 60
                     $command
                 else
-                    whiptail --msgbox "No package manager found. Please install either Flatpak, DNF, or Snap." 10 50
+                    whiptail --msgbox "No package manager found. Please install either Flatpak, DNF, or Snap." 8 60
                 fi
             else
-                whiptail --msgbox "Package name cannot be empty." 10 50
+                whiptail --msgbox "Package name cannot be empty." 8 60
             fi
             ;;
         2)
-            packageName=$(whiptail --inputbox "Enter the name of the package to remove:" 8 50 --title "Remove a Package" 3>&1 1>&2 2>&3)
+            packageName=$(whiptail --inputbox "Enter the name of the package to remove:" 8 60 --title "Remove a Package" 3>&1 1>&2 2>&3)
             if [[ -n $packageName ]]; then
                 if command_exists "flatpak"; then
                     command="flatpak uninstall -y $packageName"
-                    whiptail --msgbox "Executing command: $command" 10 50
+                    whiptail --msgbox "Executing command: $command" 8 60
                     $command
                 elif command_exists "dnf"; then
                     command="sudo dnf remove -y $packageName"
-                    whiptail --msgbox "Executing command: $command" 10 50
+                    whiptail --msgbox "Executing command: $command" 8 60
                     $command
                 elif command_exists "snap"; then
                     command="sudo snap remove $packageName"
-                    whiptail --msgbox "Executing command: $command" 10 50
+                    whiptail --msgbox "Executing command: $command" 8 60
                     $command
                 else
-                    whiptail --msgbox "No package manager found. Please install either Flatpak, DNF, or Snap." 10 50
+                    whiptail --msgbox "No package manager found. Please install either Flatpak, DNF, or Snap." 8 60
                 fi
             else
-                whiptail --msgbox "Package name cannot be empty." 10 50
+                whiptail --msgbox "Package name cannot be empty." 8 60
             fi
             ;;
         3)
-            packageName=$(whiptail --inputbox "Enter the name of the package to search:" 8 50 --title "Search for a Package" 3>&1 1>&2 2>&3)
+            packageName=$(whiptail --inputbox "Enter the name of the package to search:" 8 60 --title "Search for a Package" 3>&1 1>&2 2>&3)
             if [[ -n $packageName ]]; then
                 if command_exists "flatpak"; then
                     command="flatpak search $packageName"
-                    whiptail --msgbox "Executing command: $command" 10 50
+                    whiptail --msgbox "Executing command: $command" 8 60
                     $command
-                elif command_exists "dnf"; then
+                    sleep 10
+                fi
+
+                if command_exists "dnf"; then
                     command="sudo dnf search $packageName"
-                    whiptail --msgbox "Executing command: $command" 10 50
+                    whiptail --msgbox "Executing command: $command" 8 60
                     $command
-                elif command_exists "snap"; then
+                    sleep 10
+                fi
+
+                if command_exists "snap"; then
                     command="sudo snap search $packageName"
-                    whiptail --msgbox "Executing command: $command" 10 50
+                    whiptail --msgbox "Executing command: $command" 8 60
                     $command
+                    sleep 10
+                fi
+
                 else
-                    whiptail --msgbox "No package manager found. Please install either Flatpak, DNF, or Snap." 10 50
+                    whiptail --msgbox "No package manager found. Please install either Flatpak, DNF, or Snap." 8 60
                 fi
             else
-                whiptail --msgbox "Package name cannot be empty." 10 50
+                whiptail --msgbox "Package name cannot be empty." 8 60
             fi
             ;;
         4)
@@ -533,7 +542,7 @@ while "$packageOptionLoop"; do
                 sudo dnf install -y steam
             echo 100
             sleep 1
-                } | whiptail --gauge "Running Script" 6 60 0
+                } | whiptail --gauge "Running Script" 20 60 0
                 ;;
             2)
             {
@@ -583,7 +592,7 @@ while "$packageOptionLoop"; do
                 fi
             echo 100
             sleep 1
-                } | whiptail --gauge "Running Script" 6 60 0
+                } | whiptail --gauge "Running Script" 20 60 0
                 ;;
             3)
             {
@@ -629,7 +638,7 @@ while "$packageOptionLoop"; do
                 sudo dnf install -y intel-media-driver
             echo 100
             sleep 1
-                } | whiptail --gauge "Running Script" 6 60 0
+                } | whiptail --gauge "Running Script" 20 60 0
                 ;;
             4)
             {
@@ -687,7 +696,7 @@ while "$packageOptionLoop"; do
                 flatpak install org.gimp.GIMP -y
             echo 100
             sleep 1
-                } | whiptail --gauge "Running Script" 6 60 0
+                } | whiptail --gauge "Running Script" 20 60 0
                 ;;
             5)
             {
@@ -743,7 +752,7 @@ while "$packageOptionLoop"; do
                 sudo dnf install -y steam
             echo 100
             sleep 1
-                } | whiptail --gauge "Running Script" 6 60 0
+                } | whiptail --gauge "Running Script" 20 60 0
                 ;;
             6)
             {
@@ -795,7 +804,7 @@ while "$packageOptionLoop"; do
                 sudo dnf install -y steam
             echo 100
             sleep 1
-                } | whiptail --gauge "Running Script" 6 60 0
+                } | whiptail --gauge "Running Script" 20 60 0
                 ;;
             7)
             {
@@ -831,14 +840,14 @@ while "$packageOptionLoop"; do
                 flatpak install flathub org.libreoffice-LibreOffice -y
             echo 100
             sleep 1
-                } | whiptail --gauge "Running Script" 6 60 0
+                } | whiptail --gauge "Running Script" 20 60 0
                 ;;
             8)
                 break
                 ;;
             *)
                 # Display an error message if an invalid option is selected
-                whiptail --msgbox "Invalid option selected" 8 40
+                whiptail --msgbox "Invalid option selected" 8 60
                 ;;
         esac
     done
@@ -877,7 +886,7 @@ while "$packageOptionLoop"; do
                 ;;
         *)
             # Display an error message if an invalid option is selected
-            whiptail --msgbox "Invalid option selected" 8 40
+            whiptail --msgbox "Invalid option selected" 8 60
             ;;
         esac
     done
@@ -892,7 +901,7 @@ while "$packageOptionLoop"; do
         snap refresh
         echo 100
         sleep 1
-       } | whiptail --gauge "Updating System" 6 60 0
+       } | whiptail --gauge "Updating System" 20 60 0
         ;;
     8)
         if [[ "$fedora_version" == "38" ]]; then
@@ -904,7 +913,7 @@ while "$packageOptionLoop"; do
             sudo dnf -y system-upgrade download --releasever=39
             sudo dnf -y system-upgrade reboot
         else if [[ "$fedora_version" == "39" ]]; then
-        whiptail --yesno "You are already on the latest version. Do you want to look for updates instead?" 10 50
+        whiptail --yesno "You are already on the latest version. Do you want to look for updates instead?" 8 60
 
         wantUpdate=$?
 
@@ -918,7 +927,7 @@ while "$packageOptionLoop"; do
          snap refresh
          echo 100
          sleep 1
-         } | whiptail --gauge "Updating System" 6 60 0
+         } | whiptail --gauge "Updating System" 20 60 0
          fi
         else
             break
@@ -931,11 +940,11 @@ while "$packageOptionLoop"; do
         reboot
         ;;
     10)
-        whiptail --msgbox "Exiting script..." 8 40
+        whiptail --msgbox "Exiting script..." 8 60
         exit 0
         ;;
     *)
-        whiptail --msgbox "Invalid option selected" 8 40
+        whiptail --msgbox "Invalid option selected" 8 60
         ;;
     esac
 done
