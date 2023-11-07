@@ -97,6 +97,38 @@ void extractFedoraVersion(char *version) {
     fclose(file);
 }
 
+bool installWithPackageManager(const char* packageName, const char* packageManager) {
+    char command[256];
+    snprintf(command, sizeof(command), "%s install -y %s", packageManager, packageName);
+    printf("Executing command: %s\n", command);
+    int result = system(command);
+    return (result == 0); // Return true if the installation was successful
+}
+
+bool uninstallWithFlatpak(const char* packageName) {
+    char command[256];
+    snprintf(command, sizeof(command), "flatpak uninstall -y %s", packageName);
+    printf("Executing command: %s\n", command);
+    int result = system(command);
+    return (result == 0); // Return true if the uninstallation was successful
+}
+
+bool uninstallWithDNF(const char* packageName) {
+    char command[256];
+    snprintf(command, sizeof(command), "sudo dnf remove -y %s", packageName);
+    printf("Executing command: %s\n", command);
+    int result = system(command);
+    return (result == 0); // Return true if the uninstallation was successful
+}
+
+bool uninstallWithSnap(const char* packageName) {
+    char command[256];
+    snprintf(command, sizeof(command), "sudo snap remove %s", packageName);
+    printf("Executing command: %s\n", command);
+    int result = system(command);
+    return (result == 0); // Return true if the uninstallation was successful
+}
+
 int main() {
 
     int option;
@@ -107,6 +139,7 @@ int main() {
     char customOption[256];
     char packageName[256];
     char sudoCommand[256];
+    char copr [256];
     char version[20];
 
 
@@ -257,7 +290,6 @@ int main() {
                             runCommand("sudo ln -s /var/lib/snapd/snap /snap");
                             break;
                         case 9:
-                            char copr [256];
                             printf("Copr name (creator/Program): ");
                             scanf("%s", copr);
                             runCommand("sudo dnf copr enable %s -y", copr);
@@ -383,9 +415,9 @@ int main() {
                 while (packageOptionLoop) {
                     printf("\n");
                     printf("Choose an option for Package Management Helper:\n");
-                  /*  printf("1. Install a package\n");
+                    printf("1. Install a package\n");
                     printf("2. Remove a package\n");
-                  */  printf("3. Search for a package\n");
+                    printf("3. Search for a package\n");
                     printf("4. Back to main menu\n");
                     printf("Option: ");
                     packageOption = getMenuOption(4);
@@ -395,46 +427,62 @@ int main() {
                             printf("Enter the name of the package to install: ");
                             scanf(" %[^\n]", packageName);
 
-                            printf("Package Name: %s\n", packageName);
+                            bool installed = false; // Flag to track installation status
 
-                           if (flatpakInstalled) {
-                            sprintf(command, "flatpak install -y %s", packageName);
-                            printf("Executing command: %s\n", command);
-                            system(command);
-                        } else if (dnfInstalled) {
-                            sprintf(command, "sudo dnf install -y %s", packageName);
-                            printf("Executing command: %s\n", command);
-                            system(command);
-                        } else if (snapInstalled) {
-                            sprintf(command, "sudo snap install %s", packageName);
-                            printf("Executing command: %s\n", command);
-                            system(command);
-                        } else {
-                            printf("No package manager found. Please install either Flatpak, DNF, or Snap.\n");
-                        }
-                        break;
+                            if (flatpakInstalled) {
+                                if (installWithPackageManager(packageName, "flatpak")) {
+                                    printf("%s installed successfully using Flatpak.\n", packageName);
+                                    installed = true;
+                                }
+                            }
+
+                            if (!installed && dnfInstalled) {
+                                if (installWithPackageManager(packageName, "sudo dnf")) {
+                                    printf("%s installed successfully using DNF.\n", packageName);
+                                    installed = true;
+                                }
+                            }
+
+                            if (!installed && snapInstalled) {
+                                if (installWithPackageManager(packageName, "sudo snap")) {
+                                    printf("%s installed successfully using Snap.\n", packageName);
+                                }
+                            }
+
+                            if (!installed) {
+                                printf("No package manager found or installation failed. Please install either Flatpak, DNF, or Snap.\n");
+                            }
+                            break;
                         }
                         case 2: {
-                            printf("Enter the name of the package to remove: ");
-                        scanf(" %[^\n]", packageName);
+                            printf("Enter the name of the package to uninstall: ");
+                            scanf(" %[^\n]", packageName);
 
-                        printf("Package Name: %s\n", packageName);
+                            bool uninstalled = false; // Flag to track uninstallation status
 
-                        if (flatpakInstalled) {
-                            sprintf(command, "flatpak uninstall -y %s", packageName);
-                            printf("Executing command: %s\n", command);
-                            system(command);
-                        } else if (dnfInstalled) {
-                            sprintf(command, "sudo dnf remove -y %s", packageName);
-                            printf("Executing command: %s\n", command);
-                            system(command);
-                        } else if (snapInstalled) {
-                            sprintf(command, "sudo snap remove %s", packageName);
-                            printf("Executing command: %s\n", command);
-                            system(command);
-                        } else {
-                            printf("No package manager found. Please install either Flatpak, DNF, or Snap.\n");
-                        }
+                            if (flatpakInstalled) {
+                                if (uninstallWithFlatpak(packageName)) {
+                                    printf("%s uninstalled successfully using Flatpak.\n", packageName);
+                                    uninstalled = true;
+                                }
+                            }
+
+                            if (!uninstalled && dnfInstalled) {
+                                if (uninstallWithDNF(packageName)) {
+                                    printf("%s uninstalled successfully using DNF.\n", packageName);
+                                    uninstalled = true;
+                                }
+                            }
+
+                            if (!uninstalled && snapInstalled) {
+                                if (uninstallWithSnap(packageName)) {
+                                    printf("%s uninstalled successfully using Snap.\n", packageName);
+                                }
+                            }
+
+                            if (!uninstalled) {
+                                printf("No package manager found or uninstallation failed. Please install either Flatpak, DNF, or Snap.\n");
+                            }
                         break;
                         }
                         case 3: {
