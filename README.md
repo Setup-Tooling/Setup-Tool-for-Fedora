@@ -79,8 +79,6 @@ Premade scripts:
 
 ______________________________________________________
 
-If you installed the RPM just type "setup-tool" in the terminal!!!
-
 NOW AVAILABLE ON COPR!!!
 
 sudo dnf copr enable burningpho3nix/Setup-Tool -y
