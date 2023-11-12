@@ -1,5 +1,6 @@
 # Setup Tool for Fedora
 
+# THIS PROJECT MOVED OVER TO [GITLAB](https://gitlab.com/setup-tooling-project/setup-tool)
 
 ______________________________________________________
 
